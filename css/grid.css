@@ -1,11 +1,11 @@
 .container {
-  /* 2x2 grid system */
+  /* Responsive grid system: 4 columns on wide screens (>1600px) */
 
   /* for navbar */
   margin-top: 75px;
 
   display: grid;
-  grid-template-columns: 49.5% 49.5%;
+  grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
   grid-row: auto auto;
   grid-column-gap: 1%;
   grid-row-gap: 1%;
@@ -66,7 +66,18 @@ div .container {
   width: 100%;
 }
 
+@media only screen and (max-width: 1600px) {
+  /* 3 columns for desktop screens */
+  .container {
+    grid-template-columns: 32.67% 32.67% 32.67%;
+  }
+}
+
 @media only screen and (max-width: 1080px) {
+  /* 2 columns for tablets and smaller */
+  .container {
+    grid-template-columns: 49.5% 49.5%;
+  }
 
   .container-single {
     grid-template-columns: 91vw;
