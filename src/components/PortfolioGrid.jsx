@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { motion } from 'framer-motion';
 
 const extractImageFromContent = (content) => {
   if (!content) return null;
@@ -13,7 +14,126 @@ const extractExcerpt = (content, maxLength = 250) => {
   return text.substring(0, maxLength).trim() + '...';
 };
 
-const PortfolioCard = memo(({ post, onCardClick }) => {
+const SkeletonCard = memo(({ index }) => {
+  return (
+    <motion.div
+      className="portfolio-card skeleton-card"
+      initial={{ opacity: 0.6 }}
+      animate={{ opacity: [0.6, 0.8, 0.6] }}
+      transition={{ duration: 1.5, repeat: Infinity, delay: index * 0.1 }}
+      style={{ pointerEvents: 'none' }}
+    >
+      <div className="box" style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '550px'
+      }}>
+        {/* Image at the top - fixed height matching real cards */}
+        <div className="skeleton-image" style={{
+          width: '100%',
+          height: '200px',
+          backgroundColor: 'var(--skeleton-bg, #1a1a1a)',
+          borderRadius: '10px',
+          marginBottom: '15px',
+          flexShrink: 0
+        }} />
+
+        {/* Title skeleton bars */}
+        <div style={{
+          width: '100%',
+          margin: '15px 0 10px 0',
+          flexShrink: 0,
+          display: 'block'
+        }}>
+          <div style={{
+            width: '90%',
+            height: '20px',
+            backgroundColor: '#3a3a3a',
+            borderRadius: '4px',
+            marginBottom: '8px',
+            display: 'block'
+          }} />
+          <div style={{
+            width: '60%',
+            height: '20px',
+            backgroundColor: '#3a3a3a',
+            borderRadius: '4px',
+            display: 'block'
+          }} />
+        </div>
+
+        {/* Excerpt skeleton bars */}
+        <div style={{
+          width: '100%',
+          margin: '10px 0',
+          flexGrow: 1,
+          minHeight: '60px',
+          display: 'block'
+        }}>
+          <div style={{
+            width: '100%',
+            height: '14px',
+            backgroundColor: '#3a3a3a',
+            borderRadius: '4px',
+            marginBottom: '8px',
+            display: 'block'
+          }} />
+          <div style={{
+            width: '95%',
+            height: '14px',
+            backgroundColor: '#3a3a3a',
+            borderRadius: '4px',
+            marginBottom: '8px',
+            display: 'block'
+          }} />
+          <div style={{
+            width: '88%',
+            height: '14px',
+            backgroundColor: '#3a3a3a',
+            borderRadius: '4px',
+            display: 'block'
+          }} />
+        </div>
+
+        {/* Categories placeholder */}
+        <div style={{
+          display: 'flex',
+          gap: '6px',
+          margin: '10px 0 5px 0',
+          flexShrink: 0
+        }}>
+          <div style={{
+            width: '60px',
+            height: '22px',
+            backgroundColor: 'var(--skeleton-bg, #3a3a3a)',
+            borderRadius: '15px'
+          }} />
+          <div style={{
+            width: '70px',
+            height: '22px',
+            backgroundColor: 'var(--skeleton-bg, #3a3a3a)',
+            borderRadius: '15px'
+          }} />
+        </div>
+
+        {/* Date */}
+        <div style={{
+          width: '30%',
+          height: '14px',
+          backgroundColor: 'var(--skeleton-bg, #3a3a3a)',
+          borderRadius: '4px',
+          marginTop: 'auto',
+          paddingTop: '10px',
+          flexShrink: 0
+        }} />
+      </div>
+    </motion.div>
+  );
+});
+
+SkeletonCard.displayName = 'SkeletonCard';
+
+const PortfolioCard = memo(({ post, onCardClick, index }) => {
   const imageUrl = extractImageFromContent(post.content);
   const excerpt = extractExcerpt(post.content);
   const date = new Date(post.published);
@@ -23,7 +143,7 @@ const PortfolioCard = memo(({ post, onCardClick }) => {
   });
 
   return (
-    <div
+    <motion.div
       className="portfolio-card"
       onClick={() => onCardClick(post)}
       onKeyPress={(e) => {
@@ -35,6 +155,9 @@ const PortfolioCard = memo(({ post, onCardClick }) => {
       tabIndex={0}
       role="button"
       aria-label={`Read post: ${post.title}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <div className="box">
         {imageUrl && <img src={imageUrl} className="preview-image" alt={post.title} />}
@@ -49,24 +172,25 @@ const PortfolioCard = memo(({ post, onCardClick }) => {
         )}
         <p className="post-date-preview">{formattedDate}</p>
       </div>
-    </div>
+    </motion.div>
   );
 });
 
 PortfolioCard.displayName = 'PortfolioCard';
 
 function PortfolioGrid({ posts, loading, error, onCardClick }) {
+  // Show skeleton cards while loading (estimated 12 posts visible on first screen)
+  const skeletonCount = 12;
 
   return (
     <div className="portfolio-grid-container">
       <div className="container" id="portfolio-container">
         {loading && (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
-            <div className="spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <p style={{ marginTop: '20px' }}>Loading blog posts...</p>
-          </div>
+          <>
+            {Array.from({ length: skeletonCount }).map((_, index) => (
+              <SkeletonCard key={`skeleton-${index}`} index={index} />
+            ))}
+          </>
         )}
 
         {error && (
@@ -79,8 +203,8 @@ function PortfolioGrid({ posts, loading, error, onCardClick }) {
           </div>
         )}
 
-        {!loading && !error && posts.map((post) => (
-          <PortfolioCard key={post.url} post={post} onCardClick={onCardClick} />
+        {!loading && !error && posts.map((post, index) => (
+          <PortfolioCard key={post.url} post={post} onCardClick={onCardClick} index={index} />
         ))}
       </div>
     </div>
