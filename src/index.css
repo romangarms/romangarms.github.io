@@ -27,6 +27,15 @@ html, body {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 1080px) {
+  html, body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
 body {
   background-color: #262626;
   color: #FFFFFF;
@@ -56,9 +65,16 @@ h1, h2, h3, h4 {
 
 #body {
   display: grid;
-  grid-template-columns: minmax(0, 500px) 1fr;
+  grid-template-columns: minmax(300px, 400px) 1fr;
   gap: 20px;
   overflow: hidden;
+  min-height: 0;
+}
+
+@media only screen and (max-width: 1080px) {
+  #body {
+    display: block;
+  }
 }
 
 /* Navbar */

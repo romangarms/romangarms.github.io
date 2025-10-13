@@ -2,10 +2,12 @@
     background-color: var(--main-black);
     padding: 1%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-height: 0; /* Important for flex child to respect parent height */
 }
 
 .sidebar-image-container {
@@ -27,7 +29,7 @@
     padding: 5%;
     border-radius: 10px;
     flex-shrink: 1;
-    overflow: hidden;
+    min-height: 0; /* Allow to shrink if needed */
 }
 
 #sidebar-bio p {
@@ -43,18 +45,19 @@
     display: flex;
     gap: 10px;
     flex-shrink: 1;
-    overflow: hidden;
+    min-height: 0;
 }
 
 #sidebar-links {
     color: #D1495B;
     font-size: x-large;
-
     background-color: var(--accent-gray);
     padding: 5%;
     border-radius: 10px;
     flex: 1;
-    min-width: 0; /* Important for flex items to shrink properly */
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto; /* Allow scrolling if content is too tall */
 }
 
 #sidebar-links h2 {
