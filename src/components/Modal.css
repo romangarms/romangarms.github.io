@@ -317,8 +317,7 @@
 .portfolio-card .box {
     display: flex;
     flex-direction: column;
-    min-height: 520px;
-    height: 520px;
+    height: 550px; /* Fixed height for uniform grid */
 }
 
 /* Fixed image dimensions with aspect ratio */
@@ -351,13 +350,14 @@
 
 .post-excerpt {
     color: #CCCCCC;
-    line-height: 1.5;
+    line-height: 1.6; /* Slightly more spacing to prevent clipping */
     font-size: 0.95rem;
     flex-grow: 1;
     margin: 10px 0;
-    /* Limit to 8 lines with ellipsis for more text */
+    min-height: 60px; /* Ensure space for 3 lines without clipping */
+    /* Limit to 3 lines with ellipsis for more text */
     display: -webkit-box;
-    -webkit-line-clamp: 8;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     /* Handle long words/URLs */

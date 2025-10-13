@@ -1,0 +1,15 @@
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Navbar takes natural height, body fills rest */
+  height: 100vh;
+}
+
+/* Fix framer-motion wrapper height */
+.App > div {
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+}
