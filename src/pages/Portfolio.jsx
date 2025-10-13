@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { BloggerRSSClient, BLOGGER_CONFIG } from '../services/bloggerAPI';
 import Modal from '../components/Modal';
 import Footer from '../components/Footer';
@@ -38,15 +38,15 @@ function Portfolio() {
     fetchPosts();
   }, []);
 
-  const openModal = (post) => {
+  const openModal = useCallback((post) => {
     setSelectedPost(post);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedPost(null);
-  };
+  }, []);
 
 
   return (

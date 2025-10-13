@@ -1,56 +1,61 @@
-function PortfolioGrid({ posts, loading, error, onCardClick }) {
-  const extractImageFromContent = (content) => {
-    if (!content) return null;
-    const imgMatch = content.match(/<img[^>]+src=["']([^"'>]+)["']/);
-    return imgMatch?.[1] || null;
-  };
+import { memo } from 'react';
 
-  const extractExcerpt = (content, maxLength = 250) => {
-    if (!content) return 'Click to read more about this project.';
-    const text = content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trim() + '...';
-  };
+const extractImageFromContent = (content) => {
+  if (!content) return null;
+  const imgMatch = content.match(/<img[^>]+src=["']([^"'>]+)["']/);
+  return imgMatch?.[1] || null;
+};
 
-  const PortfolioCard = ({ post }) => {
-    const imageUrl = extractImageFromContent(post.content);
-    const excerpt = extractExcerpt(post.content);
-    const date = new Date(post.published);
-    const formattedDate = date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short'
-    });
+const extractExcerpt = (content, maxLength = 250) => {
+  if (!content) return 'Click to read more about this project.';
+  const text = content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).trim() + '...';
+};
 
-    return (
-      <div
-        className="portfolio-card"
-        onClick={() => onCardClick(post)}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onCardClick(post);
-          }
-        }}
-        tabIndex={0}
-        role="button"
-        aria-label={`Read post: ${post.title}`}
-      >
-        <div className="box">
-          {imageUrl && <img src={imageUrl} className="preview-image" alt={post.title} />}
-          <h4>{post.title}</h4>
-          <p className="post-excerpt">{excerpt}</p>
-          {post.categories && post.categories.length > 0 && (
-            <div className="post-categories-card">
-              {post.categories.slice(0, 4).map(cat => (
-                <span key={cat} className="post-category-card">{cat}</span>
-              ))}
-            </div>
-          )}
-          <p className="post-date-preview">{formattedDate}</p>
-        </div>
+const PortfolioCard = memo(({ post, onCardClick }) => {
+  const imageUrl = extractImageFromContent(post.content);
+  const excerpt = extractExcerpt(post.content);
+  const date = new Date(post.published);
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short'
+  });
+
+  return (
+    <div
+      className="portfolio-card"
+      onClick={() => onCardClick(post)}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onCardClick(post);
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`Read post: ${post.title}`}
+    >
+      <div className="box">
+        {imageUrl && <img src={imageUrl} className="preview-image" alt={post.title} />}
+        <h4>{post.title}</h4>
+        <p className="post-excerpt">{excerpt}</p>
+        {post.categories && post.categories.length > 0 && (
+          <div className="post-categories-card">
+            {post.categories.slice(0, 4).map(cat => (
+              <span key={cat} className="post-category-card">{cat}</span>
+            ))}
+          </div>
+        )}
+        <p className="post-date-preview">{formattedDate}</p>
       </div>
-    );
-  };
+    </div>
+  );
+});
+
+PortfolioCard.displayName = 'PortfolioCard';
+
+function PortfolioGrid({ posts, loading, error, onCardClick }) {
 
   return (
     <div className="portfolio-grid-container">
@@ -75,7 +80,7 @@ function PortfolioGrid({ posts, loading, error, onCardClick }) {
         )}
 
         {!loading && !error && posts.map((post) => (
-          <PortfolioCard key={post.url} post={post} />
+          <PortfolioCard key={post.url} post={post} onCardClick={onCardClick} />
         ))}
       </div>
     </div>

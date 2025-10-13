@@ -2,6 +2,12 @@
    POST MODAL STYLES
    ============================================================================ */
 
+/* Prevent body scroll when modal is open - applied to body element */
+body.modal-open {
+    overflow: hidden !important;
+    padding-right: var(--scrollbar-width, 0px) !important;
+}
+
 /* Modal overlay */
 #post-modal {
     display: none; /* Hidden by default */
@@ -339,6 +345,7 @@
     /* Limit to 2 lines with ellipsis */
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.3;
@@ -358,6 +365,7 @@
     /* Limit to 3 lines with ellipsis for more text */
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     /* Handle long words/URLs */
@@ -408,6 +416,7 @@
 
     .post-excerpt {
         -webkit-line-clamp: 9;
+        line-clamp: 9;
     }
 }
 
@@ -464,6 +473,7 @@
     .post-excerpt {
         font-size: 0.95rem;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
     }
 }
 
