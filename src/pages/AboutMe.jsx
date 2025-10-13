@@ -2,9 +2,10 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <main className="about-me-page">
-      {/* Full-width title */}
-      <div className="tile-grid single-row">
+    <div className="about-me-page">
+      <div className="about-me-container">
+        {/* Full-width title */}
+        <div className="tile-grid single-row">
         <div className="tile tile-full">
           <h1>Roman Garms: About Me</h1>
         </div>
@@ -111,7 +112,8 @@ function AboutMe() {
           </p>
         </div>
       </div>
-    </main>
+      </div>
+    </div>
   );
 }
 

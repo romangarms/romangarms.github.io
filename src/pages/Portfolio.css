@@ -1,8 +1,9 @@
-/* Portfolio page layout */
+/* Portfolio page layout - prevent scrolling on desktop, use internal grid scroll */
 .portfolio-page {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .portfolio-page #body {
@@ -16,6 +17,7 @@
   .portfolio-page {
     height: auto;
     min-height: 100%;
+    overflow: visible;
   }
 
   .portfolio-page #body {

@@ -13,10 +13,9 @@
 
 #root {
   height: 100vh;
-  overflow: hidden;
 }
 
-/* On mobile, allow scrolling */
+/* On mobile, allow natural height for scrolling */
 @media only screen and (max-width: 1080px) {
   .App {
     height: auto;
@@ -32,6 +31,5 @@
   #root {
     height: auto;
     min-height: 100vh;
-    overflow: visible;
   }
 }

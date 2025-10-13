@@ -1,13 +1,61 @@
-main {
-    max-width: 1200px;
-    /* or 1000px, or whatever feels comfortable */
-    margin: 0 auto;
-    /* center it horizontally */
-    padding: 0 20px;
-    /* optional horizontal padding */
+/* About Me page wrapper - similar to Portfolio page structure */
+.about-me-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
 
-    /*for navbar*/
-    margin-top: 75px;
+/* Scrollable container for About Me content */
+.about-me-container {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    /* Custom scrollbar for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #D1495B #262626;
+}
+
+/* Custom scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+.about-me-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.about-me-container::-webkit-scrollbar-track {
+    background: #262626;
+    border-radius: 10px;
+}
+
+.about-me-container::-webkit-scrollbar-thumb {
+    background: #D1495B;
+    border-radius: 10px;
+    border: 2px solid #262626;
+}
+
+.about-me-container::-webkit-scrollbar-thumb:hover {
+    background: #E05F70;
+}
+
+/* Content wrapper with max-width for readability - only on desktop */
+@media (min-width: 800px) {
+    .about-me-container > * {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* On mobile, allow page to scroll naturally */
+@media only screen and (max-width: 1080px) {
+    .about-me-page {
+        height: auto;
+        overflow: visible;
+    }
+
+    .about-me-container {
+        height: auto;
+        overflow: visible;
+    }
 }
 
 
