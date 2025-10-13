@@ -1,0 +1,35 @@
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Fix framer-motion wrapper height */
+.App > div {
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* On mobile, allow natural height for scrolling */
+@media only screen and (max-width: 1080px) {
+  .App {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .App > div {
+    height: auto;
+    overflow: visible;
+  }
+
+  #root {
+    height: auto;
+    min-height: 100vh;
+  }
+}

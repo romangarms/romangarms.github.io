@@ -1,0 +1,497 @@
+/* ============================================================================
+   POST MODAL STYLES
+   ============================================================================ */
+
+/* Prevent body scroll when modal is open - applied to body element */
+body.modal-open {
+    overflow: hidden !important;
+    padding-right: var(--scrollbar-width, 0px) !important;
+}
+
+/* Modal overlay */
+#post-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 20px 40px 20px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal content container */
+.modal-content {
+    position: relative;
+    background-color: #24272b;
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+    max-width: 900px;
+    max-height: calc(100vh - 40px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    animation: slideIn 0.3s ease-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close button */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(0, 121, 140, 0.8);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    background: #D1495B;
+}
+
+.modal-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: #FFFFFF;
+    stroke-width: 2.5;
+}
+
+/* Post content area */
+#modal-post-content {
+    padding: 40px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    flex: 1;
+}
+
+/* Post header */
+.post-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #444;
+}
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFFFFF;
+    line-height: 1.2;
+}
+
+.post-meta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: #CCCCCC;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.post-date {
+    font-style: italic;
+}
+
+.post-author {
+    font-weight: 500;
+}
+
+/* Post categories/tags */
+.post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.post-category {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #00798C;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Post body content */
+.post-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    /* Handle long words/URLs in post content */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Force all text in post body to be white, overriding inline styles */
+.post-body * {
+    color: inherit !important;
+}
+
+/* Exceptions for links and code blocks - override inline styles */
+.post-body a {
+    color: #00798C !important;
+    font-size: inherit !important;
+    text-decoration: none;
+    border-bottom: 1px solid #00798C;
+    transition: all 0.2s ease;
+}
+
+.post-body a:hover {
+    color: #EDAE49 !important;
+    border-bottom-color: #EDAE49;
+}
+
+.post-body code {
+    color: #abb2bf !important;
+    background: #1a1a1a;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.post-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.post-body p {
+    margin-bottom: 1.2em;
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+}
+
+.post-body h1 {
+    font-size: 2rem;
+}
+
+.post-body h2 {
+    font-size: 1.6rem;
+}
+
+.post-body h3 {
+    font-size: 1.3rem;
+}
+
+.post-body h4 {
+    font-size: 1.1rem;
+}
+
+.post-body pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.post-body pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.post-body ul,
+.post-body ol {
+    margin-left: 25px;
+    margin-bottom: 1.2em;
+}
+
+.post-body li {
+    margin-bottom: 0.5em;
+}
+
+.post-body blockquote {
+    border-left: 4px solid #00798C;
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+}
+
+.post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.post-body table th,
+.post-body table td {
+    padding: 10px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+.post-body table th {
+    background: #333;
+    font-weight: 600;
+}
+
+/* Post footer */
+.post-footer {
+    padding-top: 20px;
+    border-top: 2px solid #444;
+    text-align: center;
+}
+
+.post-original-link {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #00798C;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 121, 140, 0.3);
+}
+
+.post-original-link:hover {
+    background: #EDAE49;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237, 174, 73, 0.4);
+}
+
+/* Portfolio card styling improvements */
+.portfolio-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+}
+
+.portfolio-card:focus {
+    outline: 3px solid #00798C;
+    outline-offset: 3px;
+}
+
+/* Standardize card structure */
+.portfolio-card .box {
+    display: flex;
+    flex-direction: column;
+    height: 550px; /* Fixed height for uniform grid */
+}
+
+/* Fixed image dimensions with aspect ratio */
+.portfolio-card .preview-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+}
+
+/* Card title styling */
+.portfolio-card h4 {
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    margin: 15px 0 10px 0;
+    font-weight: 600;
+    flex-shrink: 0;
+    /* Limit to 2 lines with ellipsis */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+    min-height: 3.4rem;
+    /* Handle long words */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.post-excerpt {
+    color: #CCCCCC;
+    line-height: 1.6; /* Slightly more spacing to prevent clipping */
+    font-size: 0.95rem;
+    flex-grow: 1;
+    margin: 10px 0;
+    min-height: 60px; /* Ensure space for 3 lines without clipping */
+    /* Limit to 3 lines with ellipsis for more text */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* Handle long words/URLs */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.post-date-preview {
+    font-size: 0.9rem;
+    color: #AAAAAA;
+    margin-top: auto;
+    padding-top: 10px;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+/* Portfolio card categories/tags */
+.post-categories-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0 5px 0;
+    flex-shrink: 0;
+}
+
+.post-category-card {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #00798C;
+    color: white;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Responsive design for 2-column layout */
+@media (max-width: 1080px) {
+    .portfolio-card .box {
+        min-height: 560px;
+        height: 560px;
+    }
+
+    .portfolio-card .preview-image {
+        height: 220px;
+    }
+
+    .post-excerpt {
+        -webkit-line-clamp: 9;
+        line-clamp: 9;
+    }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        border-radius: 8px;
+    }
+
+    #modal-post-content {
+        padding: 20px;
+        max-height: calc(100vh - 60px);
+    }
+
+    .post-title {
+        font-size: 1.8rem;
+    }
+
+    .post-body {
+        font-size: 1rem;
+    }
+
+    .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    /* Adjust portfolio card heights on mobile */
+    .portfolio-card .box {
+        min-height: 450px;
+        height: 450px;
+    }
+
+    .portfolio-card .preview-image {
+        height: 200px;
+    }
+
+    .portfolio-card h4 {
+        font-size: 1.2rem;
+        min-height: 3rem;
+    }
+
+    .post-excerpt {
+        font-size: 0.95rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
+
+/* Scrollbar styling for modal content */
+#modal-post-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modal-post-content::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+#modal-post-content::-webkit-scrollbar-thumb {
+    background: #00798C;
+    border-radius: 10px;
+}
+
+#modal-post-content::-webkit-scrollbar-thumb:hover {
+    background: #EDAE49;
+}

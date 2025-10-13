@@ -1,0 +1,184 @@
+/* Portfolio page layout - prevent scrolling on desktop, use internal grid scroll */
+.portfolio-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.portfolio-page #body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* On mobile, page should scroll as a whole to reveal footer */
+@media only screen and (max-width: 1080px) {
+  .portfolio-page {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  .portfolio-page #body {
+    overflow: visible;
+    flex: none;
+    height: auto;
+  }
+}
+
+/* Portfolio grid scrollable container */
+.portfolio-grid-container {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 20px 20px 0;
+  padding-bottom: 60px;
+  /* Custom scrollbar for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #D1495B #262626;
+}
+
+/* Custom scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+.portfolio-grid-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.portfolio-grid-container::-webkit-scrollbar-track {
+  background: #262626;
+  border-radius: 10px;
+}
+
+.portfolio-grid-container::-webkit-scrollbar-thumb {
+  background: #D1495B;
+  border-radius: 10px;
+  border: 2px solid #262626;
+}
+
+.portfolio-grid-container::-webkit-scrollbar-thumb:hover {
+  background: #E05F70;
+}
+
+.container {
+  display: grid;
+  /* Mobile first: 1 column by default */
+  grid-template-columns: 1fr;
+  gap: 20px;
+  grid-auto-rows: 1fr;
+  height: fit-content;
+  padding-bottom: 80px;
+}
+
+.container a {
+  text-decoration: none;
+  line-height: 30px;
+}
+
+.box {
+  /* each individual box inside the grid */
+  padding: 20px;
+  background-color: #07070A;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  transition: transform 0.3s ease;
+}
+
+.box:hover {
+  background-color: #00798C;
+  transform: scale(1.01);
+}
+
+.box img {
+  border-radius: 10px;
+  margin-bottom: 15px;
+
+}
+
+.preview-image {
+  width: 100%;
+}
+
+/* Tablet: 2 columns */
+@media only screen and (min-width: 600px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns */
+@media only screen and (min-width: 1080px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Wide screens: 4 columns */
+@media only screen and (min-width: 1600px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Hide sidebar on narrow screens */
+@media only screen and (max-width: 1080px) {
+  #body {
+    display: block;
+  }
+}
+
+/* Footer - hidden on desktop (sidebar shows instead) */
+#footer {
+  display: none;
+  width: 100%;
+  justify-content: center;
+  background-color: black;
+  padding: 20px 0;
+}
+
+#footer-tiles {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  width: 50%;
+  border-radius: 20px;
+  padding: 2%;
+  background-color: var(--accent-gray);
+}
+
+#footer-links {
+  color: #D1495B;
+  font-size: medium;
+  text-decoration: none;
+}
+
+.footer-icon {
+  filter: invert(44%) sepia(30%) saturate(1938%) hue-rotate(311deg) brightness(85%) contrast(93%);
+  padding-bottom: 2%;
+  padding-right: 2%;
+  width: 10%;
+  z-index: 1;
+  height: auto;
+}
+
+/* Show footer on narrow screens where sidebar is hidden */
+@media only screen and (max-width: 1080px) {
+  #footer {
+    display: flex;
+  }
+
+  /* On mobile, grid container doesn't scroll - page scrolls instead */
+  .portfolio-grid-container {
+    height: auto;
+    overflow-y: visible;
+    padding: 20px; /* Symmetric padding on mobile */
+    padding-bottom: 20px;
+  }
+
+  .container {
+    padding-bottom: 20px;
+  }
+}
