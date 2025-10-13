@@ -46,19 +46,16 @@ function Sidebar() {
 
         <div id="sidebar-links">
           <h2>Interactive Projects</h2>
-          <img width="48px" className="sidebar-icon" src="/images/openinnew.svg" alt="Open In New Icon" />
           <a href="https://nowplaying.romangarms.com/" target="_blank" rel="noopener noreferrer">
             Now Playing
           </a>
           <br />
 
-          <img width="48px" className="sidebar-icon" src="/images/openinnew.svg" alt="Open In New Icon" />
           <a href="https://tracker.romangarms.com/" target="_blank" rel="noopener noreferrer">
             WhereHaveIBeen
           </a>
           <br />
 
-          <img width="48px" className="sidebar-icon" src="/images/openinnew.svg" alt="Open In New Icon" />
           <a href="/UltimateTicTacToe/index.html" target="_blank" rel="noopener noreferrer">
             UltimateTicTacToe
           </a>
