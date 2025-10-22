@@ -359,7 +359,6 @@ body.modal-open {
     color: #CCCCCC;
     line-height: 1.6; /* Slightly more spacing to prevent clipping */
     font-size: 0.95rem;
-    flex-grow: 1;
     margin: 10px 0;
     min-height: 60px; /* Ensure space for 3 lines without clipping */
     /* Limit to 3 lines with ellipsis for more text */
@@ -415,8 +414,8 @@ body.modal-open {
     }
 
     .post-excerpt {
-        -webkit-line-clamp: 9;
-        line-clamp: 9;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
     }
 }
 
@@ -457,8 +456,8 @@ body.modal-open {
 
     /* Adjust portfolio card heights on mobile */
     .portfolio-card .box {
-        min-height: 450px;
-        height: 450px;
+        min-height: 550px;
+        height: 550px;
     }
 
     .portfolio-card .preview-image {
@@ -472,8 +471,8 @@ body.modal-open {
 
     .post-excerpt {
         font-size: 0.95rem;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
     }
 }
 
