@@ -37,6 +37,14 @@ function Navbar() {
                 About Me
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                to="https://romangarms.com/concepts-file-viewer"
+              >
+                Concepts File Viewer
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
