@@ -9,7 +9,14 @@ const extractImageFromContent = (content) => {
 
 const extractExcerpt = (content, maxLength = 250) => {
   if (!content) return 'Click to read more about this project.';
-  const text = content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // Create a temporary DOM element to decode HTML entities
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = content;
+
+  // Get the text content (this decodes entities and strips tags)
+  const text = tempDiv.textContent.replace(/\s+/g, ' ').trim();
+
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength).trim() + '...';
 };
