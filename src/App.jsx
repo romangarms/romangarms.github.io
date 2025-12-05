@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Portfolio from './pages/Portfolio';
 import PhotoShowcase from './pages/PhotoShowcase';
 import AboutMe from './pages/AboutMe';
+import Garage from './pages/Garage';
 import NotFound from './pages/NotFound';
 import { useFaviconAnimation } from './utils/useFaviconAnimation';
 import './App.css';
@@ -78,6 +79,19 @@ function AnimatedRoutes() {
               variants={pageVariants}
             >
               <AboutMe />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/garage"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <Garage />
             </motion.div>
           }
         />
