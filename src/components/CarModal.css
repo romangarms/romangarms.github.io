@@ -1,0 +1,319 @@
+/* ============================================================================
+   CAR MODAL STYLES
+   ============================================================================ */
+
+/* Modal overlay */
+#car-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 20px 40px 20px;
+  animation: carModalFadeIn 0.3s ease-in;
+}
+
+@keyframes carModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal content container */
+.car-modal-content {
+  position: relative;
+  background-color: #24272b;
+  margin: 0 auto;
+  padding: 0;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  animation: carModalSlideIn 0.3s ease-out;
+  overflow: visible;
+}
+
+@keyframes carModalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollable content area */
+.car-modal-scroll {
+  padding: 0 40px 40px 40px;
+}
+
+/* Hero image */
+.car-hero {
+  position: relative;
+  margin: 0 -40px 30px -40px;
+  overflow: hidden;
+}
+
+/* Forza class badge overlay */
+.forza-class-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.car-hero img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Header */
+.car-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #444;
+}
+
+.car-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.car-brief-info {
+  font-size: 1.15rem;
+  color: #CCCCCC;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.car-brief-info p {
+  margin: 0 0 0.5em 0;
+}
+
+.car-brief-info p:last-child {
+  margin-bottom: 0;
+}
+
+.car-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.car-modal-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #EDAE49;
+  color: #07070A;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Sections */
+.car-section {
+  margin-bottom: 30px;
+}
+
+.car-section h2 {
+  font-size: 1.5rem;
+  color: #00798C;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+@media (min-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat-item {
+  background: #07070A;
+  border-radius: 10px;
+  padding: 20px 15px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+  transform: scale(1.02);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #AAAAAA;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Stat icon styling */
+.stat-item .stat-icon {
+  font-size: 1.5rem;
+  color: #00798C;
+  margin-bottom: 8px;
+}
+
+
+/* Description */
+.car-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #FFFFFF;
+}
+
+.car-description a {
+  color: #00798C;
+  text-decoration: underline;
+}
+
+.car-description a:hover {
+  color: #EDAE49;
+}
+
+/* Mods list */
+.mods-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .mods-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mods-category {
+  background: #07070A;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.mods-category h3 {
+  font-size: 1.1rem;
+  color: #EDAE49;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.mods-category ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mods-category li {
+  padding: 8px 0;
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.mods-category li:last-child {
+  border-bottom: none;
+}
+
+.mods-category li::before {
+  content: ">";
+  color: #00798C;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.mod-brand {
+  color: #AAAAAA;
+  font-style: italic;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .car-modal-content {
+    width: 95%;
+    margin: 20px auto;
+    border-radius: 8px;
+  }
+
+  .car-modal-scroll {
+    padding: 0 20px 20px 20px;
+  }
+
+  .car-hero {
+    margin: 0 -20px 20px -20px;
+  }
+
+  .car-hero img {
+    max-height: 250px;
+  }
+
+  .car-title {
+    font-size: 1.8rem;
+  }
+
+  .car-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .car-description {
+    font-size: 1rem;
+  }
+}
+
+/* Scrollbar styling */
+.car-modal-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.car-modal-scroll::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+
+.car-modal-scroll::-webkit-scrollbar-thumb {
+  background: #00798C;
+  border-radius: 10px;
+}
+
+.car-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #EDAE49;
+}

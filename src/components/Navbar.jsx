@@ -40,6 +40,14 @@ function Navbar() {
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                to="/garage"
+              >
+                Garage
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                 to="https://romangarms.com/concepts-file-viewer"
               >
                 Concepts File Viewer
