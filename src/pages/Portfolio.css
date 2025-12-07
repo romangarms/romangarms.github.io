@@ -141,11 +141,10 @@
 }
 
 #footer-tiles {
-  margin-top: 2%;
-  margin-bottom: 2%;
-  width: 50%;
+  margin: 2%;
+  width: 85%;
   border-radius: 20px;
-  padding: 2%;
+  padding: 5%;
   background-color: var(--bg-card);
 }
 
