@@ -25,10 +25,34 @@
   to { opacity: 1; }
 }
 
+@keyframes carModalFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+#car-modal.closing {
+  animation: carModalFadeOut 0.25s ease-out forwards;
+}
+
+#car-modal.closing .car-modal-content {
+  animation: carModalSlideOut 0.25s ease-out forwards;
+}
+
+@keyframes carModalSlideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
 /* Modal content container */
 .car-modal-content {
   position: relative;
-  background-color: #24272b;
+  background-color: var(--bg-card);
   margin: 0 auto;
   padding: 0;
   width: 90%;
@@ -69,7 +93,7 @@
   left: 12px;
   padding: 6px 12px;
   border-radius: 6px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-weight: bold;
   font-size: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -86,20 +110,20 @@
 .car-header {
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid var(--bg-elevated);
 }
 
 .car-title {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
 .car-brief-info {
   font-size: 1.15rem;
-  color: #CCCCCC;
+  color: var(--text-secondary);
   font-style: italic;
   line-height: 1.5;
 }
@@ -121,8 +145,8 @@
 .car-modal-tag {
   display: inline-block;
   padding: 5px 12px;
-  background: #EDAE49;
-  color: #07070A;
+  background: var(--accent-secondary);
+  color: var(--text-primary);
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -135,10 +159,10 @@
 
 .car-section h2 {
   font-size: 1.5rem;
-  color: #00798C;
+  color: var(--accent-primary);
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--bg-elevated);
 }
 
 /* Stats grid */
@@ -155,7 +179,7 @@
 }
 
 .stat-item {
-  background: #07070A;
+  background: var(--bg-dark);
   border-radius: 10px;
   padding: 20px 15px;
   text-align: center;
@@ -170,14 +194,14 @@
   display: block;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 5px;
 }
 
 .stat-label {
   display: block;
   font-size: 0.85rem;
-  color: #AAAAAA;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -185,7 +209,7 @@
 /* Stat icon styling */
 .stat-item .stat-icon {
   font-size: 1.5rem;
-  color: #00798C;
+  color: var(--accent-secondary);
   margin-bottom: 8px;
 }
 
@@ -194,16 +218,16 @@
 .car-description {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .car-description a {
-  color: #00798C;
+  color: var(--accent-primary);
   text-decoration: underline;
 }
 
 .car-description a:hover {
-  color: #EDAE49;
+  color: var(--accent-secondary);
 }
 
 /* Mods list */
@@ -220,17 +244,17 @@
 }
 
 .mods-category {
-  background: #07070A;
+  background: var(--bg-dark);
   border-radius: 10px;
   padding: 20px;
 }
 
 .mods-category h3 {
   font-size: 1.1rem;
-  color: #EDAE49;
+  color: var(--accent-secondary);
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--bg-elevated);
 }
 
 .mods-category ul {
@@ -241,9 +265,9 @@
 
 .mods-category li {
   padding: 8px 0;
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-size: 0.95rem;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid var(--bg-card);
 }
 
 .mods-category li:last-child {
@@ -252,13 +276,13 @@
 
 .mods-category li::before {
   content: ">";
-  color: #00798C;
+  color: var(--accent-primary);
   font-weight: bold;
   margin-right: 10px;
 }
 
 .mod-brand {
-  color: #AAAAAA;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
@@ -305,15 +329,15 @@
 }
 
 .car-modal-scroll::-webkit-scrollbar-track {
-  background: #333;
+  background: var(--bg-elevated);
   border-radius: 10px;
 }
 
 .car-modal-scroll::-webkit-scrollbar-thumb {
-  background: #00798C;
+  background: var(--accent-primary);
   border-radius: 10px;
 }
 
 .car-modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #EDAE49;
+  background: var(--accent-secondary);
 }

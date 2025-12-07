@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
@@ -23,10 +23,27 @@ const getForzaClassColor = (forzaClass) => {
 };
 
 function CarModal({ car, isOpen, onClose }) {
+  const [isClosing, setIsClosing] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, 250);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
+      if (e.key === 'Escape' && isOpen && !isClosing) {
+        handleClose();
       }
     };
 
@@ -39,10 +56,13 @@ function CarModal({ car, isOpen, onClose }) {
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.classList.remove('modal-open');
-      document.documentElement.style.removeProperty('--scrollbar-width');
+      if (!isOpen && !isClosing) {
+        document.body.classList.remove('modal-open');
+        document.documentElement.style.removeProperty('--scrollbar-width');
+        setShouldRender(false);
+      }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, isClosing]);
 
   // Group mods by category
   const groupModsByCategory = (mods) => {
@@ -58,8 +78,8 @@ function CarModal({ car, isOpen, onClose }) {
   };
 
   const modalContent = car ? (
-    <div className="car-modal-content">
-      <button className="modal-close" onClick={onClose} aria-label="Close modal">
+    <div className="car-modal-content" onClick={(e) => e.stopPropagation()}>
+      <button className="modal-close" onClick={handleClose} aria-label="Close modal">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -179,10 +199,14 @@ function CarModal({ car, isOpen, onClose }) {
     </div>
   ) : null;
 
+  if (!isOpen && !shouldRender) return null;
+
   return createPortal(
     <div
       id="car-modal"
-      style={{ display: isOpen ? 'flex' : 'none' }}
+      className={isClosing ? 'closing' : ''}
+      style={{ display: isOpen || isClosing ? 'flex' : 'none' }}
+      onClick={handleClose}
     >
       {modalContent}
     </div>,

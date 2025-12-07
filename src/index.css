@@ -3,12 +3,22 @@
 
 /* Main Website Styles */
 :root {
-  --main-black: #07070A;
-  --accent-yellow: #EDAE49;
-  --accent-red: #D1495B;
-  --accent-blue: #00798C;
-  --accent-gray: #24272b;
-  --navbar-height: 56px; /* Default, will be updated by JS */
+  /* Background colors */
+  --bg-dark: #1a1a1a;
+  --bg-card: #252525;
+  --bg-elevated: #2f2f2f;
+
+  /* Accent colors */
+  --accent-primary: #E85A5A;
+  --accent-secondary: #6B8CAD;
+
+  /* Text colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+  --text-on-accent: #1a1a1a;
+
+  /* Layout */
+  --navbar-height: 56px;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -35,8 +45,8 @@ html, body {
 }
 
 body {
-  background-color: #262626;
-  color: #FFFFFF;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
 }
 
 a {
@@ -45,16 +55,16 @@ a {
 }
 
 a:hover {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 p {
   font-size: large;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 li {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 code {
@@ -62,7 +72,7 @@ code {
 }
 
 h1, h2, h3, h4 {
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 #body {
@@ -84,43 +94,47 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 2;
-  background-color: #EDAE49;
+  background-color: var(--bg-card);
 }
 
 .navbar ul li a,
 .navbar ul li a:link,
 .navbar ul li a:visited {
-  color: #262626;
+  color: var(--text-primary);
 }
 
 .active,
 .navbar ul li a:hover {
-  color: #FFF !important;
+  color: var(--accent-primary) !important;
 }
 
 .navbar-brand,
 .navbar-brand:hover {
   font-size: xx-large;
-  color: #262626 !important;
+  color: var(--text-primary) !important;
 }
 
 /* Ensure navbar-brand never gets active state */
 .navbar-brand.active {
-  color: #262626 !important;
+  color: var(--text-primary) !important;
 }
 
 .dropdown-menu {
-  background-color: #EDAE49;
+  background-color: var(--bg-card);
   border: none;
 }
 .dropdown-item,
 .dropdown-item:hover {
-  background-color: #EDAE49;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+.dropdown-item:hover {
+  color: var(--accent-primary);
 }
 
 /* Sidebar Styles */
 #sidebar-links a {
-  color: #D1495B;
+  color: var(--accent-primary);
   text-decoration: none;
   font-size: 1.5vh;
 }
@@ -145,6 +159,6 @@ h1, h2, h3, h4 {
 #fourohfour {
   margin: 100px;
   padding: 20px;
-  background-color: #D1495B;
+  background-color: var(--bg-elevated);
   border-radius: 25px;
 }

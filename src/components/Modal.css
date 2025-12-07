@@ -35,10 +35,38 @@ body.modal-open {
     }
 }
 
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+#post-modal.closing {
+    animation: fadeOut 0.25s ease-out forwards;
+}
+
+#post-modal.closing .modal-content {
+    animation: slideOut 0.25s ease-out forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
 /* Modal content container */
 .modal-content {
     position: relative;
-    background-color: #24272b;
+    background-color: var(--bg-card);
     margin: 0 auto;
     padding: 0;
     width: 90%;
@@ -68,7 +96,7 @@ body.modal-open {
     position: absolute;
     top: 15px;
     right: 20px;
-    background: rgba(0, 121, 140, 0.8);
+    background: var(--accent-primary);
     border: none;
     width: 45px;
     height: 45px;
@@ -84,13 +112,13 @@ body.modal-open {
 
 .modal-close:hover,
 .modal-close:focus {
-    background: #D1495B;
+    background: var(--accent-secondary);
 }
 
 .modal-close svg {
     width: 24px;
     height: 24px;
-    stroke: #FFFFFF;
+    stroke: var(--text-on-accent);
     stroke-width: 2.5;
 }
 
@@ -107,14 +135,14 @@ body.modal-open {
 .post-header {
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #444;
+    border-bottom: 2px solid var(--bg-elevated);
 }
 
 .post-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #FFFFFF;
+    color: var(--text-primary);
     line-height: 1.2;
 }
 
@@ -122,7 +150,7 @@ body.modal-open {
     display: flex;
     gap: 20px;
     align-items: center;
-    color: #CCCCCC;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     margin-bottom: 10px;
 }
@@ -146,8 +174,8 @@ body.modal-open {
 .post-category {
     display: inline-block;
     padding: 5px 12px;
-    background: #00798C;
-    color: white;
+    background: var(--accent-secondary);
+    color: var(--text-primary);
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
@@ -157,7 +185,7 @@ body.modal-open {
 .post-body {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-bottom: 30px;
     /* Handle long words/URLs in post content */
     word-wrap: break-word;
@@ -172,21 +200,21 @@ body.modal-open {
 
 /* Exceptions for links and code blocks - override inline styles */
 .post-body a {
-    color: #00798C !important;
+    color: var(--accent-primary) !important;
     font-size: inherit !important;
     text-decoration: none;
-    border-bottom: 1px solid #00798C;
+    border-bottom: 1px solid var(--accent-primary);
     transition: all 0.2s ease;
 }
 
 .post-body a:hover {
-    color: #EDAE49 !important;
-    border-bottom-color: #EDAE49;
+    color: var(--accent-secondary) !important;
+    border-bottom-color: var(--accent-secondary);
 }
 
 .post-body code {
     color: #abb2bf !important;
-    background: #1a1a1a;
+    background: var(--bg-dark);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: 'Courier New', monospace;
@@ -230,7 +258,7 @@ body.modal-open {
 }
 
 .post-body pre {
-    background: #282c34;
+    background: var(--bg-dark);
     color: #abb2bf;
     padding: 15px;
     border-radius: 8px;
@@ -255,7 +283,7 @@ body.modal-open {
 }
 
 .post-body blockquote {
-    border-left: 4px solid #00798C;
+    border-left: 4px solid var(--accent-primary);
     padding-left: 20px;
     margin: 20px 0;
     font-style: italic;
@@ -270,38 +298,38 @@ body.modal-open {
 .post-body table th,
 .post-body table td {
     padding: 10px;
-    border: 1px solid #444;
+    border: 1px solid var(--bg-elevated);
     text-align: left;
 }
 
 .post-body table th {
-    background: #333;
+    background: var(--bg-elevated);
     font-weight: 600;
 }
 
 /* Post footer */
 .post-footer {
     padding-top: 20px;
-    border-top: 2px solid #444;
+    border-top: 2px solid var(--bg-elevated);
     text-align: center;
 }
 
 .post-original-link {
     display: inline-block;
     padding: 12px 30px;
-    background: #00798C;
-    color: white;
+    background: var(--accent-primary);
+    color: var(--text-on-accent);
     text-decoration: none;
     border-radius: 25px;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 121, 140, 0.3);
+    box-shadow: 0 4px 15px rgba(232, 90, 90, 0.3);
 }
 
 .post-original-link:hover {
-    background: #EDAE49;
+    background: var(--accent-secondary);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(237, 174, 73, 0.4);
+    box-shadow: 0 6px 20px rgba(201, 166, 107, 0.4);
 }
 
 /* Portfolio card styling improvements */
@@ -315,7 +343,7 @@ body.modal-open {
 }
 
 .portfolio-card:focus {
-    outline: 3px solid #00798C;
+    outline: 3px solid var(--accent-primary);
     outline-offset: 3px;
 }
 
@@ -337,7 +365,7 @@ body.modal-open {
 
 /* Card title styling */
 .portfolio-card h4 {
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-size: 1.4rem;
     margin: 15px 0 10px 0;
     font-weight: 600;
@@ -356,7 +384,7 @@ body.modal-open {
 }
 
 .post-excerpt {
-    color: #CCCCCC;
+    color: var(--text-secondary);
     line-height: 1.6; /* Slightly more spacing to prevent clipping */
     font-size: 0.95rem;
     margin: 10px 0;
@@ -375,7 +403,7 @@ body.modal-open {
 
 .post-date-preview {
     font-size: 0.9rem;
-    color: #AAAAAA;
+    color: var(--text-secondary);
     margin-top: auto;
     padding-top: 10px;
     font-style: italic;
@@ -394,8 +422,8 @@ body.modal-open {
 .post-category-card {
     display: inline-block;
     padding: 4px 10px;
-    background: #00798C;
-    color: white;
+    background: var(--accent-secondary);
+    color: var(--text-primary);
     border-radius: 15px;
     font-size: 0.75rem;
     font-weight: 500;
@@ -482,15 +510,15 @@ body.modal-open {
 }
 
 #modal-post-content::-webkit-scrollbar-track {
-    background: #333;
+    background: var(--bg-elevated);
     border-radius: 10px;
 }
 
 #modal-post-content::-webkit-scrollbar-thumb {
-    background: #00798C;
+    background: var(--accent-primary);
     border-radius: 10px;
 }
 
 #modal-post-content::-webkit-scrollbar-thumb:hover {
-    background: #EDAE49;
+    background: var(--accent-secondary);
 }

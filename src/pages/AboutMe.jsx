@@ -40,7 +40,10 @@ function AboutMe() {
           <p>
             I'm constantly working on new projects of all kinds. Recently I've been working on a mapping project
             to track all the roads I've driven on, and a web app to show my current Spotify listening status on
-            a Raspberry Pi. I also have a blog where I write about my projects and the research I've done to make them work.
+            a Raspberry Pi.
+          </p>
+          <p>
+            Currently employed as a Junior Software Engineer at Logic.inc.
           </p>
         </div>
       </div>
