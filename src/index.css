@@ -3,6 +3,9 @@
 
 /* Main Website Styles */
 :root {
+  /* Breakpoints (for reference - CSS doesn't support variables in media queries)
+     --breakpoint-navbar: 992px; (Bootstrap lg, used for navbar-expand-lg) */
+
   /* Background colors */
   --bg-dark: #1a1a1a;
   --bg-card: #252525;

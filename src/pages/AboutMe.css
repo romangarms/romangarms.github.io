@@ -38,7 +38,7 @@
 }
 
 /* Content wrapper with max-width for readability - only on desktop */
-@media (min-width: 800px) {
+@media (min-width: 992px) {
     .about-me-container > * {
         max-width: 1200px;
         margin: 0 auto;
@@ -78,14 +78,14 @@
 }
 
 /* Four-column layout for large screens */
-@media (min-width: 800px) {
+@media (min-width: 992px) {
     .tile-grid.tile-4col {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 /* Two-column layout collapses to one column on mobile */
-@media (max-width: 799px) {
+@media (max-width: 991px) {
     .tile-grid.two-column-layout {
         grid-template-columns: 1fr;
     }
@@ -122,7 +122,7 @@
 }
 
 /* Sizing for large and small tiles on desktop */
-@media (min-width: 800px) {
+@media (min-width: 992px) {
     .tile-large {
         grid-column: span 2;
         grid-row: span 2;
@@ -148,7 +148,7 @@
 }
 
 /* Responsive image sizing */
-@media (max-width: 799px) {
+@media (max-width: 991px) {
     .tile-image img {
         width: 100%;
         height: auto;
@@ -169,14 +169,14 @@
 }
 
 /* Tall tile spans both rows on desktop */
-@media (min-width: 800px) {
+@media (min-width: 992px) {
     .two-column-layout .tile-tall {
         grid-row: span 2;
     }
 }
 
 /* On mobile, nested column and tall tile adjust */
-@media (max-width: 799px) {
+@media (max-width: 991px) {
     .two-column-layout .nested-column {
         grid-template-rows: auto auto;
     }
