@@ -45,13 +45,59 @@ function Navbar() {
                 Garage
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                to="https://romangarms.com/concepts-file-viewer"
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                Concepts File Viewer
-              </NavLink>
+                Projects
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="https://romangarms.com/concepts-file-viewer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Concepts File Viewer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="https://nowplaying.romangarms.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Now Playing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="https://tracker.romangarms.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhereHaveIBeen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="/UltimateTicTacToe/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    UltimateTicTacToe
+                  </a>
+                </li>
+                
+              </ul>
             </li>
           </ul>
         </div>

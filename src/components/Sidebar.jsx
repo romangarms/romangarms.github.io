@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 function Sidebar() {
@@ -18,9 +19,7 @@ function Sidebar() {
           done before. Big fan of porting Doom to things it never should run on.
         </p>
         <p>
-          This is my portfolio, where I showcase some of the projects I've worked on over the years.
-          Click on any of the projects to learn more about them.
-        </p>
+          This is my portfolio, where I showcase some of the projects I've worked on over the years.        </p>
       </div>
 
       <div className="sidebar-links-row">
@@ -44,24 +43,11 @@ function Sidebar() {
           </a>
         </div>
 
-        <div id="sidebar-links">
-          <h2>Interactive Projects</h2>
-          <a href="https://nowplaying.romangarms.com/" target="_blank" rel="noopener noreferrer">
-            Now Playing
-          </a>
-          <br />
-
-          <a href="https://tracker.romangarms.com/" target="_blank" rel="noopener noreferrer">
-            WhereHaveIBeen
-          </a>
-          <br />
-
-          <a href="/UltimateTicTacToe/index.html" target="_blank" rel="noopener noreferrer">
-            UltimateTicTacToe
-          </a>
-          <br />
-        </div>
       </div>
+
+      <Link to="/about" className="sidebar-read-more">
+        Read more
+      </Link>
     </div>
   );
 }
