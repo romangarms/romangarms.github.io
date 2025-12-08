@@ -99,7 +99,7 @@ function AboutMe() {
         <div className="tile tile-small">
           <h3>Instagram</h3>
           <br />
-          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/romanogarmez/">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/romangarms">
             <div className="social-links">
               <img src="/images/instagram.svg" alt="Instagram logo" />
             </div>

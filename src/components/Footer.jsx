@@ -19,7 +19,7 @@ function Footer() {
         <br />
 
         <img width="24px" className="footer-icon" src="/images/instagram.svg" alt="Instagram Icon" />
-        <a href="https://www.instagram.com/romanogarmez/" target="_blank" rel="noopener noreferrer" id="footer-links">
+        <a href="https://www.instagram.com/romangarms" target="_blank" rel="noopener noreferrer" id="footer-links">
           Instagram
         </a>
       </div>

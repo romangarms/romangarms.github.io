@@ -38,7 +38,7 @@ function Sidebar() {
           <br />
 
           <img width="48px" className="sidebar-icon" src="/images/instagram.svg" alt="Instagram Icon" />
-          <a href="https://www.instagram.com/romanogarmez/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/romangarms" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>
         </div>
