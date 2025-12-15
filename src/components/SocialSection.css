@@ -1,0 +1,24 @@
+.social-section-read-more {
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  margin-top: 16px;
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent) !important;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.social-section-read-more:hover {
+  background-color: var(--accent-secondary);
+  color: var(--text-on-accent) !important;
+}
+
+.social-section-read-more:visited {
+  color: var(--text-on-accent) !important;
+}
+
+.social-section-read-more:active {
+  color: var(--text-on-accent) !important;
+}

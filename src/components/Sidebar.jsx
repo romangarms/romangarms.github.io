@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import './Sidebar.css';
+import SocialSection from './SocialSection';
 
 function Sidebar() {
   return (
@@ -25,29 +25,9 @@ function Sidebar() {
       <div className="sidebar-links-row">
         <div id="sidebar-links">
           <h2>Social Links</h2>
-          <img width="48px" className="sidebar-icon" src="/images/github.svg" alt="GitHub Icon" />
-          <a href="https://github.com/romangarms" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <br />
-
-          <img width="48px" className="sidebar-icon" src="/images/linkedIn.svg" alt="LinkedIn Icon" />
-          <a href="https://www.linkedin.com/in/roman-garms/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
-          <br />
-
-          <img width="48px" className="sidebar-icon" src="/images/instagram.svg" alt="Instagram Icon" />
-          <a href="https://www.instagram.com/romangarms" target="_blank" rel="noopener noreferrer">
-            Instagram
-          </a>
+          <SocialSection iconClassName="sidebar-icon" />
         </div>
-
       </div>
-
-      <Link to="/about" className="sidebar-read-more">
-        Read more
-      </Link>
     </div>
   );
 }

@@ -28,8 +28,7 @@
     background-color: var(--bg-card);
     padding: 5%;
     border-radius: 10px;
-    flex-shrink: 1;
-    min-height: 0; /* Allow to shrink if needed */
+    flex-shrink: 0;
 }
 
 #sidebar-bio p {
@@ -45,8 +44,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    flex-shrink: 1;
-    min-height: 0;
+    flex-shrink: 0;
 }
 
 #sidebar-links {
@@ -57,8 +55,6 @@
     border-radius: 10px;
     flex: 1;
     min-width: 0;
-    min-height: 0;
-    overflow-y: auto; /* Allow scrolling if content is too tall */
 }
 
 #sidebar-links h2 {

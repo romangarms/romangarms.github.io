@@ -72,6 +72,7 @@
 .tile-grid.two-column-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     gap: 16px;
     padding: 20px;
     box-sizing: border-box;
@@ -136,53 +137,56 @@
 /* === IMAGE STYLES === */
 .tile-image {
     overflow: hidden;
-    padding: 0;
+    padding: 8px;
+}
+
+.tile-image .image-row {
+    display: flex;
+    gap: 8px;
 }
 
 .tile-image img {
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 16px;
     height: auto;
     width: 50%;
-    padding: 1%;
 }
 
 /* Responsive image sizing */
 @media (max-width: 991px) {
     .tile-image img {
-        width: 100%;
+        width: calc(50% - 4px);
         height: auto;
-        border-radius: 8px;
+        border-radius: 12px;
     }
-}
-
-/* === TWO-COLUMN LAYOUT NESTED STYLES === */
-.two-column-layout .nested-column {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 16px;
-
-}
-
-.two-column-layout .half-height {
-    height: 100%;
 }
 
 /* Tall tile spans both rows on desktop */
 @media (min-width: 992px) {
     .two-column-layout .tile-tall {
-        grid-row: span 2;
+        grid-column: 2;
+        grid-row: 1 / -1;
     }
 }
 
-/* On mobile, nested column and tall tile adjust */
+/* On mobile, stack everything in single column */
 @media (max-width: 991px) {
-    .two-column-layout .nested-column {
-        grid-template-rows: auto auto;
+    .tile-grid.two-column-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    /* Reorder: image first, more info second, who i am third */
+    .two-column-layout .tile-image {
+        order: 1;
+    }
+
+    .two-column-layout .tile:not(.tile-image):not(.tile-tall) {
+        order: 2;
     }
 
     .two-column-layout .tile-tall {
-        grid-row: auto;
+        order: 3;
     }
 }
 
@@ -201,8 +205,18 @@ ul {
     font-size: 1.25rem;
 }
 
+p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
 ul {
     padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.5;
 }
 
 code {
@@ -211,9 +225,24 @@ code {
     border-radius: 4px;
 }
 
-.social-links {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+.social-links-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.social-links-row a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-links-row img {
+    width: 60px;
+    height: 60px;
     background-color: white;
-    border-radius: 25%;
+    border-radius: 50%;
+    padding: 10px;
 }

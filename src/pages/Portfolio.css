@@ -61,12 +61,14 @@
 
 .container {
   display: grid;
-  /* Mobile first: 1 column by default */
-  grid-template-columns: 1fr;
+  /* Auto-fill columns: min 300px, expand to fill available space */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   grid-auto-rows: 1fr;
   height: fit-content;
   padding-bottom: 80px;
+  /* Override Bootstrap's container max-width */
+  max-width: none;
 }
 
 .container a {
@@ -103,26 +105,6 @@
   width: 100%;
 }
 
-/* Tablet: 2 columns */
-@media only screen and (min-width: 600px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop: 3 columns */
-@media only screen and (min-width: 1080px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Wide screens: 4 columns */
-@media only screen and (min-width: 1600px) {
-  .container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
 
 /* Hide sidebar on narrow screens */
 @media only screen and (max-width: 1080px) {
