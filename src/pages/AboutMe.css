@@ -226,6 +226,17 @@ li {
     line-height: 1.5;
 }
 
+li a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+li a:hover {
+    color: var(--accent-secondary);
+    text-decoration: underline;
+}
+
 code {
     background: var(--bg-elevated);
     padding: 2px 4px;

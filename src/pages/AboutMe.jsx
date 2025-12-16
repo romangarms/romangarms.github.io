@@ -78,13 +78,13 @@ function AboutMe() {
           >
             <h3>Some of my favorite projects:</h3>
             <ul>
-              <li>Spotify Now Playing web app designed for a Raspberry Pi</li>
-              <li>Teenage Engineering OP-1 Tombola themed music utility for the OP-Z synthesizer</li>
-              <li>Custom applications to run on my car's infotainment system</li>
-              <li>A Forza-Horizon-like location tracker website that shows me all of the roads I've driven</li>
-              <li>Porting a friend's game to the Playstation 3</li>
-              <li>Tuning my car with a Steam Deck</li>
-              <li>Running Doom on a drone controller</li>
+              <li><a href="/portfolio#raspberry-pi-spotify-status-the-sequel">Spotify Now Playing web app designed for a Raspberry Pi</a></li>
+              <li><a href="/portfolio#videopaks-for-the-op-z">Teenage Engineering OP-1 Tombola themed music utility for the OP-Z synthesizer</a></li>
+              <li><a href="/portfolio#hacking-my-mazda-infotainment-mzd-aio-and-casdk">Custom applications to run on my car's infotainment system</a></li>
+              <li><a href="/portfolio#programming-a-forza-horizon-style-map-tracker-wherehaveibeen">A Forza-Horizon-like location tracker website that shows me all of the roads I've driven</a></li>
+              <li><a href="/portfolio#making-a-playstation-3-game-in-2024-ps3-unity-sdk">Porting a friend's game to the Playstation 3</a></li>
+              <li><a href="/portfolio#drtuned-tuning-my-car-with-my-steam-deck">Tuning my car with a Steam Deck</a></li>
+              <li><a href="/portfolio#doom-on-a-drone-controller">Running Doom on a drone controller</a></li>
             </ul>
           </motion.div>
           <motion.div
