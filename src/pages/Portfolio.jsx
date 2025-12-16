@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BloggerRSSClient, BLOGGER_CONFIG } from '../services/bloggerAPI';
 import Modal from '../components/Modal';
 import Footer from '../components/Footer';
@@ -6,12 +7,23 @@ import Sidebar from '../components/Sidebar';
 import PortfolioGrid from '../components/PortfolioGrid';
 import './Portfolio.css';
 
+// Generate URL-friendly slug from post title
+const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 function Portfolio() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -41,12 +53,51 @@ function Portfolio() {
   const openModal = useCallback((post) => {
     setSelectedPost(post);
     setIsModalOpen(true);
-  }, []);
+    const slug = generateSlug(post.title);
+    navigate(`#${slug}`, { replace: true });
+  }, [navigate]);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedPost(null);
-  }, []);
+    navigate(location.pathname, { replace: true });
+  }, [navigate, location.pathname]);
+
+  // Handle initial hash on page load (for shared links)
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash && posts.length > 0) {
+      const matchingPost = posts.find(
+        (post) => generateSlug(post.title) === hash
+      );
+      if (matchingPost) {
+        setSelectedPost(matchingPost);
+        setIsModalOpen(true);
+      }
+    }
+  }, [posts]);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) {
+        setIsModalOpen(false);
+        setSelectedPost(null);
+      } else if (posts.length > 0) {
+        const matchingPost = posts.find(
+          (post) => generateSlug(post.title) === hash
+        );
+        if (matchingPost) {
+          setSelectedPost(matchingPost);
+          setIsModalOpen(true);
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [posts]);
 
 
   return (

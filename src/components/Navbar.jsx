@@ -1,9 +1,22 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
   const navbarCollapseRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const closeNavbar = () => {
     const navbarCollapse = navbarCollapseRef.current;
@@ -17,6 +30,12 @@ function Navbar() {
         navbarCollapse.classList.remove('show');
       }
     }
+    setDropdownOpen(false);
+  };
+
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
@@ -65,17 +84,17 @@ function Navbar() {
                 Garage
               </NavLink>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown" ref={dropdownRef}>
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
                 role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                aria-expanded={dropdownOpen}
+                onClick={toggleDropdown}
               >
                 Projects
               </a>
-              <ul className="dropdown-menu">
+              <ul className={`dropdown-menu${dropdownOpen ? ' show' : ''}`}>
                 <li>
                   <a
                     className="dropdown-item"

@@ -290,9 +290,8 @@ body.modal-open {
 }
 
 .post-body table {
-    width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 20px auto;
 }
 
 .post-body table th,
@@ -305,6 +304,19 @@ body.modal-open {
 .post-body table th {
     background: var(--bg-elevated);
     font-weight: 600;
+}
+
+/* Image caption tables: shrink to image width */
+.post-body table:has(img) {
+    width: fit-content;
+    max-width: 100%;
+    text-align: center;
+}
+
+.post-body table:has(img) td {
+    text-align: center;
+    border: none;
+    padding: 5px 0;
 }
 
 /* Post footer */

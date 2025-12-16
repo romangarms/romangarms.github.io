@@ -232,6 +232,18 @@ code {
     border-radius: 4px;
 }
 
+/* Languages tile: stretch list to fill available height */
+.tile-languages {
+    height: 100%;
+}
+
+.tile-languages ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .social-links-row {
     display: flex;
     gap: 24px;
