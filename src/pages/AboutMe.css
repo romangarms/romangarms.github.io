@@ -64,8 +64,16 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
-    padding: 20px;
+    padding: 8px 20px;
     box-sizing: border-box;
+}
+
+.tile-grid:first-child {
+    padding-top: 20px;
+}
+
+.tile-grid:last-child {
+    padding-bottom: 20px;
 }
 
 /* Two-column fixed setup */
@@ -74,7 +82,6 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     gap: 16px;
-    padding: 20px;
     box-sizing: border-box;
 }
 
