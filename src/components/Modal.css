@@ -184,7 +184,7 @@ body.modal-open {
 /* Post body content */
 .post-body {
     font-size: 1.1rem;
-    line-height: 1.7;
+    line-height: 1.5;
     color: var(--text-primary);
     margin-bottom: 30px;
     /* Handle long words/URLs in post content */
@@ -222,14 +222,15 @@ body.modal-open {
 }
 
 .post-body img {
-    max-width: 100%;
+    max-width: calc(100% - 40px);
     height: auto;
     border-radius: 8px;
     display: block;
+    margin: 0 20px;
 }
 
 .post-body p {
-    margin-bottom: 1.2em;
+    margin-bottom: 0.6em;
 }
 
 .post-body h1,
