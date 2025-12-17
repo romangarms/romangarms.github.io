@@ -139,6 +139,17 @@ function Navbar() {
                     UltimateTicTacToe
                   </a>
                 </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="https://song-rec.romangarms.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeNavbar}
+                  >
+                    Spotify Playlist Generator
+                  </a>
+                </li>
 
               </ul>
             </li>
