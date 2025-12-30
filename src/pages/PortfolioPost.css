@@ -463,6 +463,35 @@
   .post-content .post-body {
     font-size: 1rem;
   }
+
+  /* Hide table of contents on mobile */
+  .toc-sidebar {
+    display: none;
+  }
+
+  /* Hide social links footer on mobile (author section already has social links) */
+  .portfolio-post-page #footer {
+    display: none;
+  }
+
+  /* Remove float from Blogger image containers on mobile - display as block above text */
+  .post-content .post-body table,
+  .post-content .post-body .separator,
+  .post-content .post-body .separator a {
+    float: none !important;
+    clear: both !important;
+    display: block;
+    width: 100% !important;
+    margin: 20px auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .post-content .post-body table img,
+  .post-content .post-body .separator img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 /* ============================================================================
