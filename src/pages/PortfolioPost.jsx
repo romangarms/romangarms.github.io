@@ -27,6 +27,20 @@ const extractHeadings = (htmlContent) => {
   }));
 };
 
+// Extract thumbnail from post content (smaller size for cards)
+const getPostThumbnail = (postContent) => {
+  if (!postContent) return null;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(postContent, 'text/html');
+  const firstImg = doc.querySelector('img');
+  if (!firstImg?.src) return null;
+  let imgUrl = firstImg.src;
+  imgUrl = imgUrl.replace(/\/s\d+\//, '/s400/');
+  imgUrl = imgUrl.replace(/=s\d+/, '=s400');
+  imgUrl = imgUrl.replace(/=w\d+-h\d+/, '=w400');
+  return imgUrl;
+};
+
 // Add IDs to headings in HTML content for scroll targeting
 const addHeadingIds = (htmlContent) => {
   if (!htmlContent) return '';
@@ -46,6 +60,7 @@ function PortfolioPost() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -61,6 +76,7 @@ function PortfolioPost() {
 
         if (matchingPost) {
           setPost(matchingPost);
+          setAllPosts(posts);
         } else {
           setError('Post not found');
         }
@@ -82,6 +98,15 @@ function PortfolioPost() {
   const contentWithIds = useMemo(() => {
     return post ? addHeadingIds(post.content) : '';
   }, [post]);
+
+  // Find related posts based on shared categories
+  const relatedPosts = useMemo(() => {
+    if (!post?.categories || allPosts.length === 0) return [];
+    return allPosts
+      .filter(p => generateSlug(p.title) !== slug &&
+                   p.categories?.some(cat => post.categories.includes(cat)))
+      .slice(0, 3);
+  }, [post, allPosts, slug]);
 
   // Track if user clicked a TOC link (to temporarily disable scroll detection)
   const isManualScrollRef = useRef(false);
@@ -283,6 +308,55 @@ function PortfolioPost() {
           </div>
         </article>
       </div>
+
+      {/* Portfolio Post Footer */}
+      <section className="portfolio-post-footer">
+        {/* Related Posts */}
+        {relatedPosts.length > 0 && (
+          <div className="related-posts">
+            <h3>Related Posts</h3>
+            <div className="related-posts-grid">
+              {relatedPosts.map(relPost => (
+                <Link
+                  key={relPost.id}
+                  to={`/portfolio/${generateSlug(relPost.title)}`}
+                  className="related-post-card"
+                >
+                  <div
+                    className="related-post-thumbnail"
+                    style={{ backgroundImage: `url(${getPostThumbnail(relPost.content)})` }}
+                  />
+                  <span className="related-post-title">{relPost.title}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Author Section */}
+        <div className="author-section">
+          <img src="/images/sunsetpfp.jpg" alt="Roman Garms" className="author-avatar" />
+          <div className="author-info">
+            <h3>Roman Garms</h3>
+            <p>CS major at UC Santa Cruz. I like computers, cars, and making tech do things it shouldn't.</p>
+            <Link to="/about" className="author-link">Learn more →</Link>
+          </div>
+          <div className="author-social">
+            <a href="https://github.com/romangarms" target="_blank" rel="noopener noreferrer">
+              <img src="/images/github.svg" alt="GitHub" />
+            </a>
+            <a href="https://www.linkedin.com/in/roman-garms/" target="_blank" rel="noopener noreferrer">
+              <img src="/images/linkedIn.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://www.instagram.com/romangarms" target="_blank" rel="noopener noreferrer">
+              <img src="/images/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="mailto:romangarms@gmail.com">
+              <img src="/images/mail.svg" alt="Email" />
+            </a>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
