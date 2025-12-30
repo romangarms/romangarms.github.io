@@ -300,12 +300,6 @@ function PortfolioPost() {
             className="post-body"
             dangerouslySetInnerHTML={{ __html: contentWithIds }}
           />
-
-          <div className="post-footer">
-            <a href={post.url} target="_blank" rel="noopener noreferrer" className="post-original-link">
-              View on blog.romangarms.com
-            </a>
-          </div>
         </article>
       </div>
 
