@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { cars } from '../data/garageData';
 import CarModal from '../components/CarModal';
 import Footer from '../components/Footer';
@@ -8,6 +8,11 @@ import './Garage.css';
 function Garage() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Garage | Roman Garms';
+    return () => { document.title = 'Roman Garms'; };
+  }, []);
 
   const openModal = useCallback((car) => {
     setSelectedCar(car);

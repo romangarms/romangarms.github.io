@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Portfolio from './pages/Portfolio';
+import PortfolioPost from './pages/PortfolioPost';
 import PhotoShowcase from './pages/PhotoShowcase';
 import AboutMe from './pages/AboutMe';
 import Garage from './pages/Garage';
@@ -53,6 +54,19 @@ function AnimatedRoutes() {
               variants={pageVariants}
             >
               <Portfolio />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/portfolio/:slug"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <PortfolioPost />
             </motion.div>
           }
         />
