@@ -83,10 +83,28 @@ function PortfolioPost() {
     return post ? addHeadingIds(post.content) : '';
   }, [post]);
 
+  // Track if user clicked a TOC link (to temporarily disable scroll detection)
+  const isManualScrollRef = useRef(false);
+  const manualScrollTimeoutRef = useRef(null);
+
   const scrollToHeading = (headingId) => {
     const element = document.getElementById(headingId);
     if (element) {
+      // Immediately set active heading and disable scroll detection
+      setActiveHeadingId(headingId);
+      isManualScrollRef.current = true;
+
+      // Clear any existing timeout
+      if (manualScrollTimeoutRef.current) {
+        clearTimeout(manualScrollTimeoutRef.current);
+      }
+
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Re-enable scroll detection after animation completes
+      manualScrollTimeoutRef.current = setTimeout(() => {
+        isManualScrollRef.current = false;
+      }, 1000);
     }
   };
 
@@ -128,19 +146,30 @@ function PortfolioPost() {
     const container = scrollContainerRef.current;
 
     const handleScroll = () => {
-      const scrollTop = container.scrollTop;
-      const offset = 150; // How far from top to trigger
+      // Skip scroll detection if user just clicked a TOC link
+      if (isManualScrollRef.current) return;
 
-      let currentHeading = null;
+      const scrollTop = container.scrollTop;
+      // Use 1/3 of viewport height so clicked sections stay highlighted
+      const triggerPoint = scrollTop + container.clientHeight / 3;
+
+      let currentHeading = headings[0]?.id || null; // Default to first heading
 
       for (const heading of headings) {
         const element = document.getElementById(heading.id);
         if (element) {
           const elementTop = element.offsetTop - container.offsetTop;
-          if (elementTop <= scrollTop + offset) {
+          // Select heading if it's above the trigger point
+          if (elementTop <= triggerPoint) {
             currentHeading = heading.id;
           }
         }
+      }
+
+      // If scrolled to bottom, highlight last heading
+      const isAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 50;
+      if (isAtBottom && headings.length > 0) {
+        currentHeading = headings[headings.length - 1].id;
       }
 
       setActiveHeadingId(currentHeading);
@@ -152,6 +181,9 @@ function PortfolioPost() {
     container.addEventListener('scroll', handleScroll);
     return () => {
       clearTimeout(timeoutId);
+      if (manualScrollTimeoutRef.current) {
+        clearTimeout(manualScrollTimeoutRef.current);
+      }
       container.removeEventListener('scroll', handleScroll);
     };
   }, [headings, contentWithIds]);
