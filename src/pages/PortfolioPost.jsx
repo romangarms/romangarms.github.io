@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { BloggerRSSClient, BLOGGER_CONFIG } from '../services/bloggerAPI';
 import Footer from '../components/Footer';
@@ -118,6 +118,44 @@ function PortfolioPost() {
     img.src = heroImage;
   }, [heroImage]);
 
+  // Track active heading for TOC highlighting
+  const [activeHeadingId, setActiveHeadingId] = useState(null);
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (headings.length === 0 || !scrollContainerRef.current) return;
+
+    const container = scrollContainerRef.current;
+
+    const handleScroll = () => {
+      const scrollTop = container.scrollTop;
+      const offset = 150; // How far from top to trigger
+
+      let currentHeading = null;
+
+      for (const heading of headings) {
+        const element = document.getElementById(heading.id);
+        if (element) {
+          const elementTop = element.offsetTop - container.offsetTop;
+          if (elementTop <= scrollTop + offset) {
+            currentHeading = heading.id;
+          }
+        }
+      }
+
+      setActiveHeadingId(currentHeading);
+    };
+
+    // Initial check after content renders
+    const timeoutId = setTimeout(handleScroll, 100);
+
+    container.addEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timeoutId);
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [headings, contentWithIds]);
+
   if (loading) {
     return (
       <div className="portfolio-post-page">
@@ -144,7 +182,7 @@ function PortfolioPost() {
   }
 
   return (
-    <div className="portfolio-post-page">
+    <div className="portfolio-post-page" ref={scrollContainerRef}>
       {/* Hero Section */}
       <div
         className={`post-hero ${heroImageLoaded ? 'image-loaded' : ''}`}
@@ -188,7 +226,7 @@ function PortfolioPost() {
                 {headings.map((heading) => (
                   <button
                     key={heading.id}
-                    className={`toc-link toc-level-${heading.level}`}
+                    className={`toc-link toc-level-${heading.level} ${activeHeadingId === heading.id ? 'toc-active' : ''}`}
                     onClick={() => scrollToHeading(heading.id)}
                   >
                     {heading.text}

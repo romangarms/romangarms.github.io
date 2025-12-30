@@ -224,6 +224,24 @@
   color: var(--accent-primary);
 }
 
+.toc-link.toc-active {
+  position: relative;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.toc-link.toc-active::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
 .toc-level-1 { padding-left: 0; }
 .toc-level-2 { padding-left: 12px; }
 .toc-level-3 { padding-left: 24px; font-size: 0.85rem; }
@@ -421,6 +439,15 @@
     background: var(--bg-elevated);
     border-radius: 20px;
     font-size: 0.85rem;
+  }
+
+  .toc-link.toc-active {
+    background: var(--accent-primary);
+    color: var(--text-on-accent);
+  }
+
+  .toc-link.toc-active::before {
+    display: none; /* Hide the left border on mobile */
   }
 
   .toc-level-1,
