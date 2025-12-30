@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './AboutMe.css';
 
@@ -12,6 +13,11 @@ const tileTransition = (index) => ({
 });
 
 function AboutMe() {
+  useEffect(() => {
+    document.title = 'About Me | Roman Garms';
+    return () => { document.title = 'Roman Garms'; };
+  }, []);
+
   return (
     <div className="about-me-page">
       <div className="about-me-container">

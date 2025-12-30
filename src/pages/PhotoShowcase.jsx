@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
 import './PhotoShowcase.css';
 
 function PhotoShowcase() {
+  useEffect(() => {
+    document.title = 'Photo Showcase | Roman Garms';
+    return () => { document.title = 'Roman Garms'; };
+  }, []);
+
   return (
     <div className="photo-showcase-page">
       <div id="body">

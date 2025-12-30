@@ -134,6 +134,7 @@ h1, h2, h3, h4 {
 .active,
 .navbar ul li a:hover {
   color: var(--accent-primary) !important;
+  text-decoration: none;
 }
 
 .navbar-brand,

@@ -22,6 +22,11 @@ function Portfolio() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Portfolio | Roman Garms';
+    return () => { document.title = 'Roman Garms'; };
+  }, []);
+
+  useEffect(() => {
     const fetchPosts = async () => {
       try {
         const client = new BloggerRSSClient(BLOGGER_CONFIG);

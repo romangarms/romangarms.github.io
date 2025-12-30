@@ -91,6 +91,16 @@ function PortfolioPost() {
     fetchPost();
   }, [slug]);
 
+  // Update browser tab title when post loads
+  useEffect(() => {
+    if (post?.title) {
+      document.title = `${post.title} | Roman Garms`;
+    }
+    return () => {
+      document.title = 'Roman Garms';
+    };
+  }, [post]);
+
   const headings = useMemo(() => {
     return post ? extractHeadings(post.content) : [];
   }, [post]);
