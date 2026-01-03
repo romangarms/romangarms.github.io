@@ -14,12 +14,14 @@
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
+    "firebase": "^12.7.0",
     "framer-motion": "^12.23.24",
     "gh-pages": "^6.3.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "recharts": "^3.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

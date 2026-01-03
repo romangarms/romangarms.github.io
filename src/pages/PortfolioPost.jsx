@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { BloggerRSSClient, BLOGGER_CONFIG } from '../services/bloggerAPI';
+import { trackView } from '../services/statsService';
 import Footer from '../components/Footer';
 import './PortfolioPost.css';
 
@@ -100,6 +101,13 @@ function PortfolioPost() {
       document.title = 'Roman Garms';
     };
   }, [post]);
+
+  // Track page view when post loads
+  useEffect(() => {
+    if (post && slug) {
+      trackView(slug);
+    }
+  }, [post, slug]);
 
   const headings = useMemo(() => {
     return post ? extractHeadings(post.content) : [];
