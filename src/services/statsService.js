@@ -6,11 +6,11 @@
 
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, push, get } from 'firebase/database';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 // ============================================================================
 // FIREBASE CONFIGURATION
 // ============================================================================
-// TODO: Replace with your Firebase project config
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -29,6 +29,15 @@ try {
   if (firebaseConfig.databaseURL) {
     app = initializeApp(firebaseConfig);
     database = getDatabase(app);
+
+    // Initialize App Check (only in production with valid site key)
+    const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+    if (recaptchaSiteKey) {
+      initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(recaptchaSiteKey),
+        isTokenAutoRefreshEnabled: true
+      });
+    }
   }
 } catch (error) {
   console.warn('Firebase initialization failed:', error.message);
