@@ -6,6 +6,8 @@ import PortfolioPost from './pages/PortfolioPost';
 import PhotoShowcase from './pages/PhotoShowcase';
 import AboutMe from './pages/AboutMe';
 import Garage from './pages/Garage';
+import Stats from './pages/Stats';
+import PostStats from './pages/PostStats';
 import NotFound from './pages/NotFound';
 import { useFaviconAnimation } from './utils/useFaviconAnimation';
 import './App.css';
@@ -106,6 +108,32 @@ function AnimatedRoutes() {
               variants={pageVariants}
             >
               <Garage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/stats"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <Stats />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/stats/:slug"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <PostStats />
             </motion.div>
           }
         />

@@ -1,0 +1,78 @@
+.referrer-list {
+  background: var(--bg-elevated);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.referrer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.referrer-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.referrer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.referrer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.referrer-name {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.referrer-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.referrer-bar-container {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-dark);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.referrer-bar {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  min-width: 2px;
+}
+
+.referrer-empty {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .referrer-list {
+    padding: 15px;
+  }
+
+  .referrer-title {
+    font-size: 1rem;
+  }
+
+  .referrer-name {
+    font-size: 0.9rem;
+  }
+}

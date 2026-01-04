@@ -1,0 +1,36 @@
+.stats-chart {
+  background: var(--bg-elevated);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .stats-chart {
+    padding: 15px;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+}
