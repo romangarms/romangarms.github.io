@@ -12,7 +12,7 @@ function Sidebar() {
       </div>
       <div id="sidebar-bio">
         <p>
-          Hiya! I'm Roman Garms, a Computer Science major going to University of California Santa Cruz.
+          Hi! I'm Roman Garms, a Computer Science major going to University of California Santa Cruz.
         </p>
         <p>
           I'm interested in computers, cars, videography, as well as trying to get tech to do something it's never
