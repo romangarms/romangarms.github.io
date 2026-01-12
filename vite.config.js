@@ -13,7 +13,7 @@ export default defineConfig({
       }
     }
   ],
-  base: './', // Use relative paths for GitHub Pages
+  base: '/', // Use absolute paths for GitHub Pages with custom domain
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
