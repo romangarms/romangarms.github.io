@@ -35,27 +35,45 @@ class BloggerRSSClient {
     getFetchUrls() {
         const encodedUrl = encodeURIComponent(this.config.rssUrl);
         return [
+            // Try multiple CORS proxies in order
+            `https://api.allorigins.win/raw?url=${encodedUrl}`,
             `https://corsproxy.io/?${encodedUrl}`,
+            `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}`,
+            // Direct URL as final fallback (will fail in browser due to CORS)
             this.config.rssUrl
         ];
     }
 
     /**
-     * Attempt to fetch from a single URL
+     * Attempt to fetch from a single URL with timeout
      */
-    async attemptFetch(url) {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/xml, text/xml, application/atom+xml'
+    async attemptFetch(url, timeoutMs = 1000) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/xml, text/xml, application/atom+xml'
+                },
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
-        });
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            return await response.text();
+        } catch (error) {
+            clearTimeout(timeoutId);
+            if (error.name === 'AbortError') {
+                throw new Error(`Request timeout after ${timeoutMs}ms`);
+            }
+            throw error;
         }
-
-        return await response.text();
     }
 
     /**
