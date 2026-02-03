@@ -36,9 +36,9 @@ class BloggerRSSClient {
         const encodedUrl = encodeURIComponent(this.config.rssUrl);
         return [
             // Try multiple CORS proxies in order
+            `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}`,
             `https://api.allorigins.win/raw?url=${encodedUrl}`,
             `https://corsproxy.io/?${encodedUrl}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}`,
             // Direct URL as final fallback (will fail in browser due to CORS)
             this.config.rssUrl
         ];
