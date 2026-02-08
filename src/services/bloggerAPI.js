@@ -15,8 +15,8 @@ const BLOGGER_CONFIG = {
     // Maximum number of posts to fetch
     maxResults: 50,
 
-    // Cache duration in milliseconds (30 minutes)
-    cacheDuration: 30 * 60 * 1000
+    // Cache duration in milliseconds (2 hours)
+    cacheDuration: 2 * 60 * 60 * 1000
 };
 
 // ============================================================================
@@ -30,16 +30,14 @@ class BloggerRSSClient {
     }
 
     /**
-     * Get fetch URLs to try (uses CORS proxies with fallbacks)
+     * Get fetch URLs to try (uses self-hosted Cloudflare Worker)
      */
     getFetchUrls() {
         const encodedUrl = encodeURIComponent(this.config.rssUrl);
         return [
-            // Try multiple CORS proxies in order
-            `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}`,
-            `https://api.allorigins.win/raw?url=${encodedUrl}`,
-            `https://corsproxy.io/?${encodedUrl}`,
-            // Direct URL as final fallback (will fail in browser due to CORS)
+            // Self-hosted Cloudflare Worker (primary and most reliable)
+            `https://cors-header-proxy.romangarms.workers.dev/corsproxy/?apiurl=${encodedUrl}`,
+            // Direct URL as fallback (will fail in browser due to CORS)
             this.config.rssUrl
         ];
     }
@@ -47,7 +45,7 @@ class BloggerRSSClient {
     /**
      * Attempt to fetch from a single URL with timeout
      */
-    async attemptFetch(url, timeoutMs = 1000) {
+    async attemptFetch(url, timeoutMs = 5000) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -80,11 +78,14 @@ class BloggerRSSClient {
      * Fetches blog posts from RSS feed with caching and fallback proxies
      */
     async fetchPosts() {
-        // Check cache first
+        // Check fresh cache first
         const cachedData = this.getCachedPosts();
         if (cachedData) {
             return cachedData;
         }
+
+        // Try to get stale cache as fallback
+        const staleCache = this.getStaleCachedPosts();
 
         const urls = this.getFetchUrls();
         let lastError = null;
@@ -123,8 +124,13 @@ class BloggerRSSClient {
             }
         }
 
-        // All URLs failed
+        // All URLs failed - use stale cache if available
         console.error('All fetch attempts failed');
+        if (staleCache) {
+            console.warn('Using stale cached data as fallback');
+            return staleCache;
+        }
+
         throw new Error(`Failed to fetch blog posts: ${lastError?.message || 'Unknown error'}`);
     }
 
@@ -235,6 +241,22 @@ class BloggerRSSClient {
 
         } catch (error) {
             console.error('Error reading cache:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Get cached posts even if expired (for fallback)
+     */
+    getStaleCachedPosts() {
+        try {
+            const cachedPosts = sessionStorage.getItem(this.cacheKey);
+            if (!cachedPosts) {
+                return null;
+            }
+            return JSON.parse(cachedPosts);
+        } catch (error) {
+            console.error('Error reading stale cache:', error);
             return null;
         }
     }
