@@ -17,7 +17,7 @@ export const projects = [
     title: "Concepts File Viewer",
     description: "A web-based viewer application that displays Concepts drawing files (proprietary app format) in your browser by reverse-engineering the .concept file format. View your Concepts artwork without needing the iPad app.",
     image: "https://blogger.googleusercontent.com/img/a/AVvXsEj2ROYjm1fZlc2apbErT41P4-vbF81rf7UMu7_r4Y2gfZyETij_a524RjGhY3_NGPVU4rqfF20dWG5Dsj5pVPMHEAkBQDGUFMXx_7LtdaRrntmMBSf_d3oUfx7tJEsfPgbOf9PwlMbtnL2BPmm6A5cMBg-jTpSy78IvXNxZ2HjlvM0xE2GyF4zbD3ho_xAY",
-    liveUrl: "https://romangarms.com/concepts-file-viewer/",
+    liveUrl: "https://romangarms.com/Concepts-File-Viewer/",
     githubUrl: "https://github.com/romangarms/Concepts-File-Viewer",
     downloadUrl: null,
     tags: ["Concepts", "Programming"],
