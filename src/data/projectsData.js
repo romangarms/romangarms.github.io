@@ -88,7 +88,7 @@ export const projects = [
   {
     id: "videopaks-opz",
     title: "Videopaks for the OP-Z",
-    description: "Custom visual tools for the OP-Z synthesizer through the Videolab platform. Features a spinning drum interface that generates visuals when playing notes, and a mobile controller with sliders and gyro controls that sync with the synthesizer's audio output.",
+    description: "Custom visual tools for the OP-Z synthesizer through the Videolab platform. Features a spinning drum interface that generates visuals when playing notes, and a mobile controller with sliders and gyro controls that send MIDI output to the synthesizer.",
     image: "https://blogger.googleusercontent.com/img/a/AVvXsEiR4lm1l47za4bWS57JimOPEpEY79vJ-wJkmWrMZ0504CRybKH86WEc1UKAYUYr2QPSksgBbuX236f-uMHgvMQbpJfguBwHyvlJWiDlbpihQ3ymjoU1T8iAOh9kZmFdHy5EfBRWvmZMjqNm9RHfEw4ylkcP_Q3r3NZJoRX1qv55em3LTlA3jlFgJMUeFemc",
     liveUrl: null,
     githubUrl: "https://github.com/Romano-Garmez/Romans-VideoPaks",

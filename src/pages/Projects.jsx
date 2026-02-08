@@ -109,12 +109,92 @@ function GitHubStars({ githubUrl }) {
   );
 }
 
+// Helper to get GitHub URL from project
+const getProjectGithubUrl = (project) => {
+  if (project.githubUrl) return project.githubUrl;
+  if (project.githubUrls && project.githubUrls[0]) return project.githubUrls[0].url;
+  return null;
+};
+
+// Fetch stars for a single project
+const fetchProjectStars = async (project) => {
+  const githubUrl = getProjectGithubUrl(project);
+  if (!githubUrl) return { project, stars: null };
+
+  const match = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+  if (!match) return { project, stars: null };
+
+  const [, owner, repo] = match;
+
+  // Check cache first
+  const cachedStars = getCachedStars(owner, repo);
+  if (cachedStars !== null) {
+    return { project, stars: cachedStars };
+  }
+
+  // Try to fetch from API
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+    const data = await response.json();
+
+    if (data.stargazers_count !== undefined) {
+      cacheStars(owner, repo, data.stargazers_count);
+      return { project, stars: data.stargazers_count };
+    }
+  } catch (error) {
+    // Fetch failed, will sort by date instead
+  }
+
+  return { project, stars: null };
+};
+
 function Projects() {
+  const [sortedProjects, setSortedProjects] = useState(projects);
+
   useEffect(() => {
     document.title = 'Projects | Roman Garms';
     return () => {
       document.title = 'Roman Garms';
     };
+  }, []);
+
+  useEffect(() => {
+    // Fetch stars for all projects and sort
+    const sortProjects = async () => {
+      const projectsWithStars = await Promise.allSettled(
+        projects.map(project => fetchProjectStars(project))
+      );
+
+      // Extract successful results
+      const results = projectsWithStars
+        .filter(result => result.status === 'fulfilled')
+        .map(result => result.value);
+
+      // Check if we got any star counts
+      const hasStars = results.some(r => r.stars !== null);
+
+      // Sort based on what data we have
+      const sorted = [...projects].sort((a, b) => {
+        if (hasStars) {
+          // Sort by stars (descending), with null values at the end
+          const aResult = results.find(r => r.project.id === a.id);
+          const bResult = results.find(r => r.project.id === b.id);
+          const aStars = aResult?.stars ?? -1;
+          const bStars = bResult?.stars ?? -1;
+
+          if (aStars !== bStars) {
+            return bStars - aStars; // Higher stars first
+          }
+        }
+
+        // Fall back to date sorting (newer first)
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      setSortedProjects(sorted);
+    };
+
+    sortProjects();
   }, []);
 
   return (
@@ -126,7 +206,7 @@ function Projects() {
         </div>
 
         <div className="projects-container">
-          {projects.map((project) => (
+          {sortedProjects.map((project) => (
             <div key={project.id} className="project-card">
               {/* Blurred background layer */}
               <div
