@@ -1,0 +1,340 @@
+/* Projects Page Layout */
+.projects-page {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--bg-dark);
+}
+
+.projects-body {
+  padding: 40px 20px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 40px 20px 0;
+}
+
+.projects-header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+}
+
+.projects-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Projects Container */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Individual Project Card */
+.project-card {
+  position: relative;
+  min-height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+
+/* Blurred Background Layer */
+.project-card-background {
+  position: absolute;
+  inset: -40px;
+  background-size: cover;
+  background-position: center;
+  background-image: var(--project-image);
+  filter: blur(8px);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Gradient Overlay */
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.75) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+/* Card Content Container */
+.project-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  min-height: 500px;
+  align-items: center;
+}
+
+/* Left Side - Project Image */
+.project-image-container {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+/* Right Side - Project Info */
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent-secondary);
+  color: var(--text-primary);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Status Badge */
+.project-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-card .project-status.active {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.project-card .project-status.maintained {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6 !important;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.project-card .project-status.archived {
+  background: rgba(156, 163, 175, 0.2);
+  color: #9ca3af !important;
+  border: 1px solid rgba(156, 163, 175, 0.4);
+}
+
+/* GitHub Stars */
+.github-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.github-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: #fbbf24;
+}
+
+.project-description {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.read-more-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-style: italic;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.read-more-link:hover {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+.project-meta {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.project-date {
+  display: inline-block;
+}
+
+/* Action Buttons */
+.project-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.project-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.project-btn-primary {
+  background: var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+.project-btn-primary:hover {
+  background: transparent;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.project-btn-secondary {
+  background: transparent;
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+}
+
+.project-btn-secondary:hover {
+  background: var(--accent-secondary);
+  color: var(--text-on-accent);
+  transform: translateY(-2px);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .projects-header h1 {
+    font-size: 2.8rem;
+  }
+
+  .projects-header p {
+    font-size: 1.1rem;
+  }
+
+  .project-card-content {
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .project-title {
+    font-size: 2rem;
+  }
+
+  .project-description {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .projects-body {
+    padding: 20px 15px 50px;
+  }
+
+  .projects-header {
+    margin-bottom: 40px;
+    padding: 20px 10px 0;
+  }
+
+  .projects-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .projects-header p {
+    font-size: 1rem;
+  }
+
+  .projects-container {
+    gap: 30px;
+  }
+
+  .project-card {
+    min-height: auto;
+    margin-bottom: 0;
+  }
+
+  .project-card-content {
+    flex-direction: column;
+    padding: 25px;
+    gap: 25px;
+    min-height: auto;
+  }
+
+  .project-image-container {
+    flex: none;
+    width: 100%;
+  }
+
+  .project-title {
+    font-size: 1.8rem;
+  }
+
+  .project-description {
+    font-size: 1rem;
+  }
+
+  .project-actions {
+    flex-direction: column;
+  }
+
+  .project-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Reduce blur for better mobile performance */
+  .project-card-background {
+    filter: blur(5px);
+  }
+}
