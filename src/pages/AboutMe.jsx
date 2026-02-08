@@ -157,7 +157,7 @@ function AboutMe() {
               </p>
               <br>
               </br>
-              <h4>University of Washington - Instructional Assitant</h4>
+              <h4>University of Washington - Instructional Assistant</h4>
               <p>
                 Helped teach high school students programming basics, and languages including Java and Python. Included creating and showcasing presentations of other relevant computer science topics.
               </p>

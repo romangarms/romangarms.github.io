@@ -17,10 +17,10 @@ export const cars = [
     title: "2023 Mazda 3 Turbo Hatchback",
     image: "/images/garage/M3TH.jpeg",
     briefInfo: "Hot hatch adjacent, dream daily for many years. Now mine. \n\n An absolute treat at the AutoX, and getting it ready for more track days.",
-    description: "My current daily driver. I purchased this car used in 2025 after another driver totalled my beloved 2015 Mazda 3. Slowly building it up for spirited driving plus autocross duties, but it will see a track day every now and then.\n\n Next up on the todo list is a tune, coilovers, and Brembo big brake kit. Eventually...",
+    description: "My current daily driver. I purchased this car used in 2025 after another driver totalled my beloved 2015 Mazda 3. Slowly building it up for spirited driving plus autocross duties, but it will see a track day every now and then.\n\n Next up on the todo list is coilovers, and Brembo big brake kit. Eventually...",
     stats: {
-      power: "250 HP",
-      torque: "320 lb-ft",
+      power: "300 HP",
+      torque: "380 lb-ft",
       zeroToSixty: "5.5s",
       forzaClass: "B 620",
       topSpeed: "135 mph",
@@ -30,8 +30,9 @@ export const cars = [
       usage: ["Daily", "AutoX", "Track"]
     },
     mods: [
-      { name: "Corksport Short Ram Intake + Heatshield", category: "Engine" },
+      { name: "Corksport Short Ram Intake + Airbox", category: "Engine" },
       { name: "Corksport Turbo Inlet Pipe", category: "Engine" },
+      { name: "DRTuned Tier 2 Tune", category: "Engine" },
       { name: "Corksport Rear Sway Bar", category: "Suspension" },
       { name: "Michelin Pilot Sport 4", category: "Wheels + Tires" },
       { name: "Konig Ultragrams 18x8.5", category: "Wheels + Tires" },

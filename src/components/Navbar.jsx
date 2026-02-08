@@ -1,22 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
   const navbarCollapseRef = useRef(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
 
   const closeNavbar = () => {
     const navbarCollapse = navbarCollapseRef.current;
@@ -30,12 +17,6 @@ function Navbar() {
         navbarCollapse.classList.remove('show');
       }
     }
-    setDropdownOpen(false);
-  };
-
-  const toggleDropdown = (e) => {
-    e.preventDefault();
-    setDropdownOpen(!dropdownOpen);
   };
 
   return (
@@ -84,74 +65,14 @@ function Navbar() {
                 Garage
               </NavLink>
             </li>
-            <li className="nav-item dropdown" ref={dropdownRef}>
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                aria-expanded={dropdownOpen}
-                onClick={toggleDropdown}
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                to="/projects"
+                onClick={closeNavbar}
               >
                 Projects
-              </a>
-              <ul className={`dropdown-menu${dropdownOpen ? ' show' : ''}`}>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="https://romangarms.com/Concepts-File-Viewer"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeNavbar}
-                  >
-                    Concepts File Viewer
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="https://nowplaying.romangarms.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeNavbar}
-                  >
-                    Now Playing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="https://tracker.romangarms.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeNavbar}
-                  >
-                    WhereHaveIBeen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="/UltimateTicTacToe/index.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeNavbar}
-                  >
-                    UltimateTicTacToe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="https://song-rec.romangarms.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeNavbar}
-                  >
-                    Spotify Playlist Generator
-                  </a>
-                </li>
-
-              </ul>
+              </NavLink>
             </li>
           </ul>
         </div>

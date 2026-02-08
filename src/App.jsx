@@ -6,6 +6,7 @@ import PortfolioPost from './pages/PortfolioPost';
 import PhotoShowcase from './pages/PhotoShowcase';
 import AboutMe from './pages/AboutMe';
 import Garage from './pages/Garage';
+import Projects from './pages/Projects';
 import Stats from './pages/Stats';
 import PostStats from './pages/PostStats';
 import NotFound from './pages/NotFound';
@@ -108,6 +109,19 @@ function AnimatedRoutes() {
               variants={pageVariants}
             >
               <Garage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <Projects />
             </motion.div>
           }
         />
