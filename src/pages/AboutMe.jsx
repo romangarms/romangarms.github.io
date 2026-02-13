@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './AboutMe.css';
+import { workExperience } from '../data/experienceData';
 
 const tileAnimation = {
   initial: { opacity: 0, y: 20 },
@@ -143,32 +144,48 @@ function AboutMe() {
 
         {/* Work Experience */}
         <div className="tile-grid">
-            <motion.div
-              className="tile tile-full"
-              {...tileAnimation}
-              transition={tileTransition(6)}
-            >
-              <h3>Work Experience</h3>
-              <h4>Logic.inc - Intern, Junior Software Engineer</h4>
-              <p>
-                I've worked for Logic.inc since June 2025, initially as an intern before being hired part-time as a Junior Software Engineer.
-                My work involves full stack development, primarily using React and TypeScript.
-                I've contributed to several projects, including a search system from backend to frontend, cross-site authentication, complete documentation for the product, document editor UX improvements and endless bug fixes.
-              </p>
-              <br>
-              </br>
-              <h4>University of Washington - Instructional Assistant</h4>
-              <p>
-                Helped teach high school students programming basics, and languages including Java and Python. Included creating and showcasing presentations of other relevant computer science topics.
-              </p>
-              <br>
-              </br>
-              <h4>Code Ninjas - Instructor</h4>
-              <p>
-                Instructing, web development, automation of computer systems. Covered coding in JavaScript, C#, Lua, and more.
-              </p>
-            </motion.div>
-          </div>
+          <motion.div
+            className="tile tile-full work-experience-section"
+            {...tileAnimation}
+            transition={tileTransition(7)}
+          >
+            <h3>Work Experience</h3>
+            {workExperience.map((job) => (
+              <div key={job.id} className="work-experience-item">
+                <div className="work-experience-header">
+                  <h4>{job.company} - {job.role}</h4>
+                  <span className="work-experience-date">{job.dateRange}</span>
+                </div>
+                {job.workType && (
+                  <span className="work-experience-location">
+                    {job.location} • {job.workType}
+                  </span>
+                )}
+                {!job.workType && (
+                  <span className="work-experience-location">
+                    {job.location}
+                  </span>
+                )}
+                <p className="work-experience-description">{job.description}</p>
+                <div className="work-experience-skills">
+                  {job.skills.map((skill) => (
+                    <span key={skill} className="skill-tag">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <div className="work-experience-footer">
+              <a
+                href="https://docs.google.com/document/d/1is7jqNzrzXMzKfPKfckSH3HTqjGVDyygLRA1Ne9f0dA/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-link"
+              >
+                View Full Resume →
+              </a>
+            </div>
+          </motion.div>
+        </div>
         </div>
       </div>
   );

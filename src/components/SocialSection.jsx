@@ -26,6 +26,12 @@ function SocialSection({ iconClassName = "" }) {
       url: "mailto:romangarms@gmail.com",
       icon: "/images/mail.svg",
       alt: "Mail Icon"
+    },
+    {
+      name: "Resume",
+      url: "https://docs.google.com/document/d/1is7jqNzrzXMzKfPKfckSH3HTqjGVDyygLRA1Ne9f0dA/edit?usp=sharing",
+      icon: "/images/resume.svg",
+      alt: "Resume Icon"
     }
   ];
 

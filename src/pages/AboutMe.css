@@ -276,3 +276,128 @@ code {
     border-radius: 50%;
     padding: 10px;
 }
+
+/* === WORK EXPERIENCE SECTION === */
+.work-experience-section {
+  padding: 20px;
+}
+
+.work-experience-item {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--bg-elevated);
+}
+
+.work-experience-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.work-experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.work-experience-header h4 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 250px;
+}
+
+.work-experience-date {
+  font-size: 1rem;
+  color: var(--accent-primary);
+  font-weight: 600;
+  white-space: nowrap;
+  font-style: italic;
+}
+
+.work-experience-location {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.work-experience-description {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Skills tags - similar to project tags */
+.work-experience-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--accent-secondary);
+  color: var(--text-primary);
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: var(--accent-primary);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .work-experience-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .work-experience-header h4 {
+    min-width: 100%;
+  }
+
+  .work-experience-date {
+    align-self: flex-start;
+  }
+
+  .skill-tag {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
+
+/* Resume link at bottom of work experience */
+.work-experience-footer {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--bg-elevated);
+  text-align: center;
+}
+
+.resume-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.resume-link:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+}
