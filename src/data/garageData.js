@@ -99,7 +99,7 @@ export const cars = [
     title: "2015 Mazda 3 S Grand Touring",
     image: "/images/garage/M3.jpeg",
     briefInfo: "My first car, then my third car, then gone. \n Great fun, learned some software hacks.",
-    description: "My mom's old car, learned to drive in it. Proceeded to buy the Audi A4, it sucked, and then returned to this car, which never let me down. \n I learned a lot of software hacks in this car, getting it set up with Mazda AIO Tweaks and CASDK, and then writing my own digital dashboard app. \n In January 2023, another driver totalled the car, leading to my new Mazda 3 Turbo. Loved this car, quite fun to drive, and quicker than one would expect at the AutoX. \n Read more about what I've done to it here: https://blog.romangarms.com/2024/06/hacking-my-mazda-infotainment-mzd-aio.html https://blog.romangarms.com/2024/03/drtuned-tuning-my-car-with-my-steam-deck.html",
+    description: "My mom's old car, learned to drive in it. Proceeded to buy the Audi A4, it sucked, and then returned to this car, which never let me down. \n I learned a lot of software hacks in this car, getting it set up with Mazda AIO Tweaks and CASDK, and then writing my own digital dashboard app. \n In January 2025, another driver totalled the car, leading to my new Mazda 3 Turbo. Loved this car, quite fun to drive, and quicker than one would expect at the AutoX. \n Read more about what I've done to it here: https://blog.romangarms.com/2024/06/hacking-my-mazda-infotainment-mzd-aio.html https://blog.romangarms.com/2024/03/drtuned-tuning-my-car-with-my-steam-deck.html",
     stats: {
       power: "200 HP",
       torque: "190 lb-ft",
