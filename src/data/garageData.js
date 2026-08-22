@@ -85,13 +85,13 @@ export const cars = [
       usage: ["Project", "AutoX", "Track"]
     },
     mods: [
-      { name: "Exhaust", category: "Engine" },
+      { name: "Remus Exhaust", category: "Engine" },
       { name: "Tune", category: "Engine" },
-      { name: "Coilovers", category: "Suspension" },
-      { name: "Continental Extreme Contact Tires", category: "Wheels + Tires" },
+      { name: "KW V3 Coilovers", category: "Suspension" },
+      { name: "Continental Sport 02 Tires", category: "Wheels + Tires" },
       { name: "BBS Wheels", category: "Wheels + Tires" },
       { name: "StopTech Big Brake Kit", category: "Brakes" },
-      { name: "Wireless Carplay Kit", category: "Electronics" },
+      { name: "Carphonics Wireless Carplay Kit", category: "Electronics" },
     ]
   },
   {

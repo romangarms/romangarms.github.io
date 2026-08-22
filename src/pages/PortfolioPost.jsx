@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { BloggerRSSClient, BLOGGER_CONFIG } from '../services/bloggerAPI';
 import { trackView } from '../services/statsService';
 import Footer from '../components/Footer';
+import Comments from '../components/Comments';
 import './PortfolioPost.css';
 
 // Generate URL-friendly slug from post title
@@ -368,6 +369,14 @@ function PortfolioPost() {
             </a>
           </div>
         </div>
+
+        {/* Comments (loaded from the Blogger comments feed) */}
+        <Comments
+          commentsUrl={post.commentsUrl}
+          commentCount={post.commentCount}
+          postUrl={post.url}
+          postAuthorUri={post.authorUri}
+        />
       </section>
 
       <Footer />

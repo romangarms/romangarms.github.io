@@ -1,5 +1,14 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
+import { getPostDescription } from '../data/postDescriptions';
+
+// Generate URL-friendly slug from post title (matches Portfolio/PortfolioPost)
+const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+};
 
 const extractImageFromContent = (content) => {
   if (!content) return null;
@@ -7,6 +16,7 @@ const extractImageFromContent = (content) => {
   return imgMatch?.[1] || null;
 };
 
+// Fallback snippet: strip the post HTML down to plain text and truncate.
 const extractExcerpt = (content, maxLength = 250) => {
   if (!content) return 'Click to read more about this project.';
 
@@ -19,6 +29,12 @@ const extractExcerpt = (content, maxLength = 250) => {
 
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength).trim() + '...';
+};
+
+// Prefer a hand-written description; fall back to an auto-generated snippet.
+const getExcerpt = (post) => {
+  const manual = getPostDescription(generateSlug(post.title));
+  return manual || extractExcerpt(post.content);
 };
 
 const SkeletonCard = memo(({ index }) => {
@@ -142,7 +158,7 @@ SkeletonCard.displayName = 'SkeletonCard';
 
 const PortfolioCard = memo(({ post, onCardClick, index }) => {
   const imageUrl = extractImageFromContent(post.content);
-  const excerpt = extractExcerpt(post.content);
+  const excerpt = getExcerpt(post);
   const date = new Date(post.published);
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
