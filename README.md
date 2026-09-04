@@ -1,14 +1,14 @@
-# Aerial Reforestation (ar.romangarms.com)
+# Aerial Reforestation (romangarms.com/ar/)
 
 Acceleration times and run leaderboards for the group's cars. This is the `ar` branch of the
-romangarms.com repo: each long-lived branch here is its own sub-site with its own domain,
-build, and deploy target, sharing only the Vite/React tooling with `main`.
+romangarms.com repo: each long-lived branch here is its own sub-site served from a subfolder of
+romangarms.com, sharing only the Vite/React tooling with `main`.
 
 ## Pages
 
-- `/acceleration` — 0–30 / 0–60 / quarter-mile table (published Google Sheet)
-- `/leaderboard` — Washington: Bellingham Cannonball Run, run photos, Disco Run, Track Addict QR codes (published Google Sheets)
-- `/leaderboard-ca` — California: Highway 9 courses from the leaderboard API, with the published sheet as a fallback
+- `/ar/acceleration` — 0–30 / 0–60 / quarter-mile table (published Google Sheet)
+- `/ar/leaderboard` — Washington: Bellingham Cannonball Run, run photos, Disco Run, Track Addict QR codes (published Google Sheets)
+- `/ar/leaderboard-ca` — California: Highway 9 courses from the leaderboard API, with the published sheet as a fallback
 
 ## Data sources
 
@@ -27,7 +27,7 @@ via their CSV export, which Google serves with permissive CORS.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:5173/ar/
 npm run build
 npm run preview
 ```
@@ -38,15 +38,11 @@ npm run preview
 npm run deploy
 ```
 
-Builds and pushes `dist/` to the `gh-pages` branch of the repo named in the `deploy` script in
-`package.json`. GitHub Pages only serves one site per repository, so each sub-site branch deploys
-to its own repository. One-time setup for this site:
+Builds with `base: '/ar/'` and pushes `dist/` into the `ar/` folder of this repo's `gh-pages`
+branch (`gh-pages --dest ar`), which only touches files under `ar/`. The main site's own deploy
+(on `main`) removes everything except `ar/`, so the two can be deployed independently.
 
-1. Create the target repo (`romangarms/ar.romangarms.com`, public, empty).
-2. Run `npm run deploy` once so the `gh-pages` branch exists.
-3. In that repo: Settings → Pages → source `gh-pages` / root, custom domain `ar.romangarms.com`,
-   enforce HTTPS. The `CNAME` file in this branch is copied into every build.
-4. DNS: change the `ar` CNAME record from `ghs.googlehosted.com` to `romangarms.github.io`.
-
-Client-side routing on GitHub Pages works through `public/404.html`, which redirects unknown paths
-back to `index.html` with the path in the query string.
+Client-side routing under `/ar/` relies on the root `404.html` published by `main`: it keeps the
+first path segment for known sub-sites and redirects to `/ar/?/<path>`, which `index.html` here
+turns back into the real URL before React Router takes over. Adding a new sub-site means adding
+its folder name to that list on `main`.

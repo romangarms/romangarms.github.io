@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ar.romangarms.com",
+  "homepage": "https://romangarms.com/ar/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --nojekyll -r https://github.com/romangarms/ar.romangarms.com.git"
+    "deploy": "gh-pages -d dist --dest ar --nojekyll"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",

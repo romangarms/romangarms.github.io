@@ -6,6 +6,7 @@ import { useAsync } from '../hooks/useAsync';
 import { fetchSheet } from '../services/sheets';
 import { SHEETS } from '../data/sheets';
 import { PHOTOS, TRACK_ADDICT_WA } from '../data/media';
+import { asset } from '../utils/asset';
 
 const CANNONBALL_COLUMNS = [
   { key: 'Time', label: 'Time', align: 'right' },
@@ -40,11 +41,11 @@ export default function LeaderboardWA() {
           <h1 className="page-title">Leaderboard (WA)</h1>
           <p className="page-lead">Run times from the Washington side of the group.</p>
         </div>
-        <img src="/images/logo.png" alt="Cannonball: Seattle to Bellingham Memorial Dash" className="page-art" />
+        <img src={asset('images/logo.png')} alt="Cannonball: Seattle to Bellingham Memorial Dash" className="page-art" />
       </header>
 
       <Section id="cannonball" title="Bellingham Cannonball Run Leaderboard">
-        <img src="/images/cannonball-smoke.jpg" alt="" className="hero-image" />
+        <img src={asset('images/cannonball-smoke.jpg')} alt="" className="hero-image" />
         <h3 className="subsection-title">North Runs</h3>
         <SheetTable sheet={SHEETS.cannonballNorth} columns={CANNONBALL_COLUMNS} />
         <h3 className="subsection-title">South Runs</h3>

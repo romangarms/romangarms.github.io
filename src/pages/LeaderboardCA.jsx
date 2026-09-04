@@ -7,6 +7,7 @@ import { fetchSheet } from '../services/sheets';
 import { SHEETS } from '../data/sheets';
 import { TRACK_ADDICT_CA } from '../data/media';
 import { formatDate } from '../utils/format';
+import { asset } from '../utils/asset';
 
 const BASE_COLUMNS = [
   { key: 'hp', label: 'HP', align: 'right' },
@@ -91,7 +92,7 @@ export default function LeaderboardCA() {
           <h1 className="page-title">Highway 9 Run Leaderboard</h1>
           <p className="page-lead">Timed runs on Highway 9 in the Santa Cruz Mountains.</p>
         </div>
-        <img src="/images/hwy9.png" alt="Cannonball 9 highway shield" className="page-art" />
+        <img src={asset('images/hwy9.png')} alt="Cannonball 9 highway shield" className="page-art" />
       </header>
 
       {data?.source === 'sheet' && (

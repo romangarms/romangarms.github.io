@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { asset } from '../utils/asset';
 import './Navbar.css';
 
 const LINKS = [
@@ -15,7 +16,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner">
         <Link className="navbar-brand" to="/" onClick={() => setOpen(false)}>
-          <img src="/images/logo.png" alt="" className="navbar-logo" />
+          <img src={asset('images/logo.png')} alt="" className="navbar-logo" />
           <span>Aerial Reforestation</span>
         </Link>
         <button

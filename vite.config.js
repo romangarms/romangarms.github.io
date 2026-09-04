@@ -1,18 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { copyFileSync } from 'fs'
 
+// Served from romangarms.com/ar/ out of the ar/ folder of this repo's gh-pages branch.
 export default defineConfig({
-  plugins: [
-    react(),
-    {
-      name: 'copy-cname',
-      closeBundle() {
-        copyFileSync('CNAME', 'dist/CNAME')
-      }
-    }
-  ],
-  base: '/',
+  plugins: [react()],
+  base: '/ar/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
