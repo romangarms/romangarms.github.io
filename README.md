@@ -8,7 +8,7 @@ romangarms.com, sharing only the Vite/React tooling with `main`.
 
 - `/ar/acceleration` — 0–30 / 0–60 / quarter-mile table (published Google Sheet)
 - `/ar/leaderboard` — Washington: Bellingham Cannonball Run, run photos, Disco Run, Track Addict QR codes (published Google Sheets)
-- `/ar/leaderboard-ca` — California: Highway 9 courses from the leaderboard API, with the published sheet as a fallback
+- `/ar/leaderboard-ca` — California: Highway 9 courses from the leaderboard API
 
 ## Data sources
 
@@ -20,7 +20,7 @@ The Highway 9 tables come from the Evergreen AutoX server (`../Evergreen-AutoX-A
 The base URL is `https://autox.romangarms.com` in production and is proxied through Vite at `/api`
 in development (see `vite.config.js`). Override it with `VITE_API_BASE` in a `.env` file.
 
-Everything else still reads the published-to-web Google Sheets (`src/data/sheets.js`) at runtime
+The WA and acceleration tables read the published-to-web Google Sheets (`src/data/sheets.js`) at runtime
 via their CSV export, which Google serves with permissive CORS.
 
 ## Development

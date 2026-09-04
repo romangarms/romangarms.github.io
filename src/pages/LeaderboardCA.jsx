@@ -3,8 +3,6 @@ import DataTable from '../components/DataTable';
 import TrackAddictCard from '../components/TrackAddictCard';
 import { useAsync } from '../hooks/useAsync';
 import { listCourses, getCourseLeaderboard } from '../services/leaderboardAPI';
-import { fetchSheet } from '../services/sheets';
-import { SHEETS } from '../data/sheets';
 import { TRACK_ADDICT_CA } from '../data/media';
 import { formatDate } from '../utils/format';
 import { asset } from '../utils/asset';
@@ -35,45 +33,9 @@ function columnsFor(runs) {
   ];
 }
 
-// The published sheet is the fallback when the API can't be reached; its columns are
-// mapped onto the API's run shape so both render through the same table.
-const SHEET_FALLBACKS = [
-  {
-    course: { name: 'Skidpad to 4 Corners Uphill', distance_miles: 1.65, legacy_distance_miles: 1.7 },
-    sheet: SHEETS.hwy9Skidpad,
-    map: (r) => ({
-      adjusted_time: r['Adj.Time'], time: r['Raw Time'], hp: r.HP, vehicle: r.Vehicle,
-      avg_speed_mph: r['Avg Speed'], top_speed_mph: r['Top Speed'], driver: r.Driver,
-      run_date: r.Date, time_of_day: r['Time of Day'], conditions: r.Road,
-      legacy: r.Legacy === 'TRUE',
-    }),
-  },
-  {
-    course: { name: 'Intro to HWY 9' },
-    sheet: SHEETS.hwy9Intro,
-    map: (r) => ({
-      adjusted_time: r.Time, time: r.Time, hp: r.HP, vehicle: r.Vehicle,
-      avg_speed_mph: r['Avg Speed'], top_speed_mph: r['Top Speed'], driver: r.Driver,
-      run_date: r.Date, time_of_day: r['Time of Day'], conditions: r.Conditions,
-      legacy: false, notes: r.Info,
-    }),
-  },
-];
-
 async function loadBoards() {
-  try {
-    const courses = await listCourses();
-    const boards = await Promise.all(courses.map((c) => getCourseLeaderboard(c.id)));
-    return { source: 'api', boards };
-  } catch (apiError) {
-    const boards = await Promise.all(
-      SHEET_FALLBACKS.map(async ({ course, sheet, map }) => ({
-        course,
-        runs: (await fetchSheet(sheet)).rows.filter((r) => r.Vehicle).map(map),
-      })),
-    );
-    return { source: 'sheet', apiError, boards };
-  }
+  const courses = await listCourses();
+  return Promise.all(courses.map((c) => getCourseLeaderboard(c.id)));
 }
 
 function courseNote(course) {
@@ -85,8 +47,7 @@ function courseNote(course) {
 }
 
 export default function LeaderboardCA() {
-  const { data, error, loading } = useAsync(loadBoards);
-  const boards = data?.boards ?? SHEET_FALLBACKS.map(({ course }) => ({ course, runs: [] }));
+  const { data: boards, error, loading } = useAsync(loadBoards);
 
   return (
     <div className="page">
@@ -98,17 +59,17 @@ export default function LeaderboardCA() {
         <img src={asset('images/hwy9.png')} alt="Cannonball 9 highway shield" className="page-art" />
       </header>
 
-      {data?.source === 'sheet' && (
-        <div className="notice">
-          The live leaderboard API couldn't be loaded in this browser, so these tables come from the published sheet.
-        </div>
-      )}
-
-      {boards.map(({ course, runs }) => (
-        <Section key={course.name} title={course.name} subtitle={courseNote(course)}>
-          <DataTable columns={columnsFor(runs)} rows={runs} loading={loading} error={error} />
+      {boards ? (
+        boards.map(({ course, runs }) => (
+          <Section key={course.id} title={course.name} subtitle={courseNote(course)}>
+            <DataTable columns={columnsFor(runs)} rows={runs} />
+          </Section>
+        ))
+      ) : (
+        <Section title="Courses">
+          <DataTable columns={columnsFor([])} rows={[]} loading={loading} error={error} />
         </Section>
-      ))}
+      )}
 
       <Section id="record" title="Record Your Own Time (CA - HWY 9)" subtitle="Import into Track Addict.">
         <div className="card-grid">
