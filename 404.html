@@ -10,7 +10,12 @@
       // string into just a query string, and then redirects the browser
       // to the new url with only a query string and hash fragment
 
-      var pathSegmentsToKeep = 0;
+      // Sub-sites deployed from other branches live in top-level folders of the
+      // gh-pages branch with their own index.html, so keep that folder in the URL
+      // and let their copy of the redirect handler restore the rest of the path.
+      var subsites = ["ar"];
+      var firstSegment = window.location.pathname.split("/")[1];
+      var pathSegmentsToKeep = subsites.indexOf(firstSegment) === -1 ? 0 : 1;
 
       var l = window.location;
       l.replace(
