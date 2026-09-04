@@ -1,6 +1,6 @@
 // Production talks to the API directly; in dev Vite proxies /api to it (see vite.config.js).
 export const API_BASE =
-  import.meta.env.VITE_API_BASE ?? (import.meta.env.DEV ? '' : 'http://mini.romangarms.com:8321');
+  import.meta.env.VITE_API_BASE ?? (import.meta.env.DEV ? '' : 'https://autox.romangarms.com');
 
 async function getJSON(path) {
   const res = await fetch(`${API_BASE}${path}`);

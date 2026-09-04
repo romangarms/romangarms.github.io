@@ -17,7 +17,7 @@ The Highway 9 tables come from the Evergreen AutoX server (`../Evergreen-AutoX-A
 - `GET /api/leaderboard/courses`
 - `GET /api/leaderboard/courses/{id}`
 
-The base URL is `http://mini.romangarms.com:8321` in production and is proxied through Vite at `/api`
+The base URL is `https://autox.romangarms.com` in production and is proxied through Vite at `/api`
 in development (see `vite.config.js`). Override it with `VITE_API_BASE` in a `.env` file.
 
 Everything else still reads the published-to-web Google Sheets (`src/data/sheets.js`) at runtime

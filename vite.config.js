@@ -11,9 +11,9 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // The leaderboard API has no CORS headers and is plain HTTP, so dev traffic goes through Vite.
+      // Dev traffic to the leaderboard API goes through Vite so the API origin never sees localhost.
       '/api': {
-        target: 'http://mini.romangarms.com:8321',
+        target: 'https://autox.romangarms.com',
         changeOrigin: true,
       }
     }
