@@ -6,17 +6,17 @@ import { SHEETS } from '../data/sheets';
 import { hpTint } from '../utils/tints';
 
 const COLUMNS = [
-  { key: 'Year', label: 'Year' },
-  { key: 'Vehicle', label: 'Vehicle' },
-  { key: 'Driver', label: 'Driver', align: 'center' },
+  { key: 'Year', label: 'Year', secondary: true },
+  { key: 'Vehicle', label: 'Vehicle', wrap: true },
+  { key: 'Driver', label: 'Driver', align: 'center', secondary: true },
   { key: 'Horsepower', label: 'HP', align: 'right', tint: (r) => hpTint(r.Horsepower) },
-  { key: 'Weight', label: 'Weight (lb)', align: 'right' },
+  { key: 'Weight', label: 'Weight (lb)', align: 'right', secondary: true },
   { key: '0-30 Time', label: '0–30 (s)', align: 'right' },
   { key: '0-60 Time', label: '0–60 (s)', align: 'right' },
-  { key: '1/4 Time', label: '¼ mi (s)', align: 'right' },
-  { key: '1/4 Speed', label: '¼ mi (mph)', align: 'right' },
-  { key: '1/8 Time', label: '⅛ mi (s)', align: 'right' },
-  { key: '1/8 Speed', label: '⅛ mi (mph)', align: 'right' },
+  { key: '1/4 Time', label: '¼ mi (s)', align: 'right', secondary: true },
+  { key: '1/4 Speed', label: '¼ mi (mph)', align: 'right', secondary: true },
+  { key: '1/8 Time', label: '⅛ mi (s)', align: 'right', secondary: true },
+  { key: '1/8 Speed', label: '⅛ mi (mph)', align: 'right', secondary: true },
 ];
 
 export default function Acceleration() {

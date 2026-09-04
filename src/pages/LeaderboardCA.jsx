@@ -12,13 +12,13 @@ import { hpTint, conditionTint } from '../utils/tints';
 
 const BASE_COLUMNS = [
   { key: 'hp', label: 'HP', align: 'right', tint: (r) => hpTint(r.hp) },
-  { key: 'vehicle', label: 'Vehicle' },
-  { key: 'avg_speed_mph', label: 'Avg (mph)', align: 'right' },
-  { key: 'top_speed_mph', label: 'Top (mph)', align: 'right' },
+  { key: 'vehicle', label: 'Vehicle', wrap: true },
+  { key: 'avg_speed_mph', label: 'Avg (mph)', align: 'right', secondary: true },
+  { key: 'top_speed_mph', label: 'Top (mph)', align: 'right', secondary: true },
   { key: 'driver', label: 'Driver', align: 'center' },
-  { key: 'run_date', label: 'Date', align: 'right', render: (r) => formatDate(r.run_date) || '—' },
-  { key: 'time_of_day', label: 'Time of Day', align: 'right' },
-  { key: 'conditions', label: 'Road', tint: (r) => conditionTint(r.conditions) },
+  { key: 'run_date', label: 'Date', align: 'right', secondary: true, render: (r) => formatDate(r.run_date) || '—' },
+  { key: 'time_of_day', label: 'Time of Day', align: 'right', secondary: true },
+  { key: 'conditions', label: 'Road', secondary: true, tint: (r) => conditionTint(r.conditions) },
 ];
 
 function columnsFor(runs) {
@@ -27,11 +27,11 @@ function columnsFor(runs) {
   return [
     { key: 'adjusted_time', label: hasLegacy ? 'Adj. Time' : 'Time', align: 'right' },
     ...(hasLegacy
-      ? [{ key: 'time', label: 'Raw Time', align: 'right', tint: (r) => (r.legacy ? 'lightgreen' : null) }]
+      ? [{ key: 'time', label: 'Raw Time', align: 'right', secondary: true, tint: (r) => (r.legacy ? 'lightgreen' : null) }]
       : []),
     ...BASE_COLUMNS,
-    ...(hasLegacy ? [{ key: 'legacy', label: 'Legacy', align: 'center' }] : []),
-    ...(hasNotes ? [{ key: 'notes', label: 'Notes' }] : []),
+    ...(hasLegacy ? [{ key: 'legacy', label: 'Legacy', align: 'center', secondary: true }] : []),
+    ...(hasNotes ? [{ key: 'notes', label: 'Notes', secondary: true }] : []),
   ];
 }
 

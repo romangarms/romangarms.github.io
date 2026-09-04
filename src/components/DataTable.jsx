@@ -32,6 +32,7 @@ function display(v) {
 
 export default function DataTable({ columns, rows, loading, error, rank = true, emptyMessage = 'No entries yet.' }) {
   const [sort, setSort] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const ranked = useMemo(() => (rows ?? []).map((row, i) => ({ row, rank: i + 1 })), [rows]);
 
@@ -50,14 +51,25 @@ export default function DataTable({ columns, rows, loading, error, rank = true, 
     });
   };
 
+  const colClass = (c, extra) =>
+    [extra, c.secondary && 'col-secondary', c.wrap && 'col-wrap'].filter(Boolean).join(' ') || undefined;
+  const hasSecondary = columns.some((c) => c.secondary);
+
   return (
-    <div className="table-wrap">
+    <div className={showAll ? 'table-wrap' : 'table-wrap compact'}>
+      {hasSecondary && (
+        <div className="table-toolbar">
+          <button type="button" className="toolbar-btn" onClick={() => setShowAll((v) => !v)}>
+            {showAll ? 'Show fewer columns' : 'Show all columns'}
+          </button>
+        </div>
+      )}
       <table className="data-table">
         <thead>
           <tr>
             {rank && <th className="col-rank">#</th>}
             {columns.map((c) => (
-              <th key={c.key} className={c.align ? `align-${c.align}` : undefined}>
+              <th key={c.key} className={colClass(c, c.align && `align-${c.align}`)}>
                 <button type="button" className="sort-btn" onClick={() => toggleSort(c.key)}>
                   {c.label}
                   <span className="sort-indicator" aria-hidden="true">
@@ -74,7 +86,7 @@ export default function DataTable({ columns, rows, loading, error, rank = true, 
               <tr key={`skeleton-${i}`} className="skeleton-row">
                 {rank && <td><span className="skeleton" /></td>}
                 {columns.map((c) => (
-                  <td key={c.key}><span className="skeleton" /></td>
+                  <td key={c.key} className={colClass(c)}><span className="skeleton" /></td>
                 ))}
               </tr>
             ))}
@@ -96,9 +108,8 @@ export default function DataTable({ columns, rows, loading, error, rank = true, 
                 {rank && <td className="col-rank">{r}</td>}
                 {columns.map((c) => {
                   const tint = c.tint?.(row);
-                  const classes = [c.align && `align-${c.align}`, tint && `tint tint-${tint}`].filter(Boolean);
                   return (
-                    <td key={c.key} className={classes.length ? classes.join(' ') : undefined}>
+                    <td key={c.key} className={colClass(c, [c.align && `align-${c.align}`, tint && `tint tint-${tint}`].filter(Boolean).join(' '))}>
                       {c.render ? c.render(row) : display(row[c.key])}
                     </td>
                   );

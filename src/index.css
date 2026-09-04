@@ -161,9 +161,35 @@ button {
   border-radius: 10px;
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1.25rem 0.9rem 2rem;
+  }
+
   .page-header {
-    flex-direction: column-reverse;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .page-art {
+    width: 72px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-lead {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    max-height: 140px;
   }
 }

@@ -11,22 +11,22 @@ import { conditionTint, limiterTint } from '../utils/tints';
 
 const CANNONBALL_COLUMNS = [
   { key: 'Time', label: 'Time', align: 'right' },
-  { key: 'Vehicle', label: 'Vehicle' },
-  { key: 'Avg Speed', label: 'Avg (mph)', align: 'right' },
-  { key: 'Top Speed', label: 'Top (mph)', align: 'right', tint: (r) => limiterTint(r['Top Speed']) },
-  { key: 'Start Time', label: 'Start', align: 'right' },
+  { key: 'Vehicle', label: 'Vehicle', wrap: true },
+  { key: 'Avg Speed', label: 'Avg (mph)', align: 'right', secondary: true },
+  { key: 'Top Speed', label: 'Top (mph)', align: 'right', secondary: true, tint: (r) => limiterTint(r['Top Speed']) },
+  { key: 'Start Time', label: 'Start', align: 'right', secondary: true },
   { key: 'Driver', label: 'Driver', align: 'center' },
-  { key: 'Date', label: 'Date', align: 'right' },
+  { key: 'Date', label: 'Date', align: 'right', secondary: true },
   { key: 'Condition', label: 'Conditions', tint: (r) => conditionTint(r.Condition) },
 ];
 
 const DISCO_COLUMNS = [
   { key: 'Time', label: 'Time', align: 'right' },
-  { key: 'Model Year', label: 'Year' },
-  { key: 'Vehicle', label: 'Vehicle' },
+  { key: 'Model Year', label: 'Year', secondary: true },
+  { key: 'Vehicle', label: 'Vehicle', wrap: true },
   { key: 'Direction Up/Down', label: 'Direction' },
   { key: 'Driver', label: 'Driver', align: 'center' },
-  { key: 'Date', label: 'Date', align: 'right' },
+  { key: 'Date', label: 'Date', align: 'right', secondary: true },
 ];
 
 function SheetTable({ sheet, columns }) {
