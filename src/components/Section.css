@@ -1,0 +1,25 @@
+.section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  color: var(--accent-primary);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+}
+
+.section-subtitle {
+  margin-top: 0.25rem;
+  max-width: 70ch;
+}
+
+.subsection-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--text-primary);
+}

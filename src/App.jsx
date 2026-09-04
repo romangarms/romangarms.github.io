@@ -1,186 +1,63 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Portfolio from './pages/Portfolio';
-import PortfolioPost from './pages/PortfolioPost';
-import PhotoShowcase from './pages/PhotoShowcase';
-import AboutMe from './pages/AboutMe';
-import Garage from './pages/Garage';
-import Projects from './pages/Projects';
-import Stats from './pages/Stats';
-import PostStats from './pages/PostStats';
+import Footer from './components/Footer';
+import Acceleration from './pages/Acceleration';
+import LeaderboardWA from './pages/LeaderboardWA';
+import LeaderboardCA from './pages/LeaderboardCA';
 import NotFound from './pages/NotFound';
-import { useFaviconAnimation } from './utils/useFaviconAnimation';
-import './App.css';
 
-// Page transition variants
+const MotionDiv = motion.div;
+
 const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: 20
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: 'easeOut'
-    }
-  },
-  exit: {
-    opacity: 0,
-    y: -20,
-    transition: {
-      duration: 0.3,
-      ease: 'easeIn'
-    }
-  }
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: 'easeIn' } },
 };
+
+function Page({ children }) {
+  return (
+    <MotionDiv initial="initial" animate="animate" exit="exit" variants={pageVariants}>
+      {children}
+    </MotionDiv>
+  );
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
-
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={<Navigate to="/portfolio" replace />}
-        />
-        <Route
-          path="/portfolio"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <Portfolio />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/portfolio/:slug"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <PortfolioPost />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/photos"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <PhotoShowcase />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <AboutMe />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/garage"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <Garage />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <Projects />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/stats"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <Stats />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/stats/:slug"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <PostStats />
-            </motion.div>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-            >
-              <NotFound />
-            </motion.div>
-          }
-        />
+        <Route path="/" element={<Navigate to="/acceleration" replace />} />
+        <Route path="/acceleration" element={<Page><Acceleration /></Page>} />
+        <Route path="/leaderboard" element={<Page><LeaderboardWA /></Page>} />
+        <Route path="/leaderboard-ca" element={<Page><LeaderboardCA /></Page>} />
+        <Route path="*" element={<Page><NotFound /></Page>} />
       </Routes>
     </AnimatePresence>
   );
 }
 
-function App() {
-  // Animate the favicon
-  useFaviconAnimation();
-
+export default function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Navbar />
-        <AnimatedRoutes />
+        <main>
+          <AnimatedRoutes />
+        </main>
+        <Footer />
       </div>
     </Router>
   );
 }
-
-export default App;

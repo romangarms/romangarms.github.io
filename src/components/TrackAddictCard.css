@@ -1,0 +1,26 @@
+.ta-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.ta-qr {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.ta-card figcaption {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ta-card figcaption span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}

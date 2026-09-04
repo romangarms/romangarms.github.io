@@ -1,15 +1,11 @@
 import './Footer.css';
-import SocialSection from './SocialSection';
 
-function Footer() {
+export default function Footer() {
   return (
-    <div id="footer">
-      <div id="footer-tiles">
-        <h2>Social Links</h2>
-        <SocialSection iconClassName="footer-icon" />
-      </div>
-    </div>
+    <footer className="footer">
+      <span>Aerial Reforestation</span>
+      <span className="footer-sep">·</span>
+      <a href="https://romangarms.com">romangarms.com</a>
+    </footer>
   );
 }
-
-export default Footer;

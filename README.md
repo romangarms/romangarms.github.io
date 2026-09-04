@@ -1,102 +1,52 @@
-# Roman Garms - Portfolio Website
+# Aerial Reforestation (ar.romangarms.com)
 
-my website
+Acceleration times and run leaderboards for the group's cars. This is the `ar` branch of the
+romangarms.com repo: each long-lived branch here is its own sub-site with its own domain,
+build, and deploy target, sharing only the Vite/React tooling with `main`.
+
+## Pages
+
+- `/acceleration` — 0–30 / 0–60 / quarter-mile table (published Google Sheet)
+- `/leaderboard` — Washington: Bellingham Cannonball Run, run photos, Disco Run, Track Addict QR codes (published Google Sheets)
+- `/leaderboard-ca` — California: Highway 9 courses from the leaderboard API, with the published sheet as a fallback
+
+## Data sources
+
+The Highway 9 tables come from the Evergreen AutoX server (`../Evergreen-AutoX-App`):
+
+- `GET /api/leaderboard/courses`
+- `GET /api/leaderboard/courses/{id}`
+
+The base URL is `http://mini.romangarms.com:8321` in production and is proxied through Vite at `/api`
+in development (see `vite.config.js`). Override it with `VITE_API_BASE` in a `.env` file.
+
+Everything else still reads the published-to-web Google Sheets (`src/data/sheets.js`) at runtime
+via their CSV export, which Google serves with permissive CORS.
 
 ## Development
 
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
 ```bash
-# Clone the repository
-git clone https://github.com/romangarms/romangarms-website.git
-cd romangarms-website
-
-# Install dependencies
 npm install
-```
-
-### Running Locally
-
-```bash
-# Start the development server
-npm run dev
-
-# The app will be available at http://localhost:5173
-```
-
-### Building for Production
-
-```bash
-# Create an optimized production build
+npm run dev      # http://localhost:5173
 npm run build
-
-# Preview the production build locally
 npm run preview
 ```
 
-The build outputs to the `/dist` directory.
-
-### Deployment
-
-Deploy to GitHub Pages with a single command:
+## Deployment
 
 ```bash
-# Build and deploy to gh-pages branch
 npm run deploy
 ```
 
-This will:
-1. Build the React app (`npm run build`)
-2. Deploy the `/dist` folder to the `gh-pages` branch
-3. Your site will be live at https://romangarms.com
+Builds and pushes `dist/` to the `gh-pages` branch of the repo named in the `deploy` script in
+`package.json`. GitHub Pages only serves one site per repository, so each sub-site branch deploys
+to its own repository. One-time setup for this site:
 
-## How It Works
+1. Create the target repo (`romangarms/ar.romangarms.com`, public, empty).
+2. Run `npm run deploy` once so the `gh-pages` branch exists.
+3. In that repo: Settings → Pages → source `gh-pages` / root, custom domain `ar.romangarms.com`,
+   enforce HTTPS. The `CNAME` file in this branch is copied into every build.
+4. DNS: change the `ar` CNAME record from `ghs.googlehosted.com` to `romangarms.github.io`.
 
-### SPA on GitHub Pages
-
-GitHub Pages doesn't natively support client-side routing. This project uses a workaround:
-
-1. **404.html** - When a user visits a direct URL (e.g., `/about`), GitHub Pages serves 404.html
-2. **Redirect Script** - 404.html contains a script that converts the path to a query parameter
-3. **index.html** - Reads the query parameter and uses `history.replaceState()` to restore the URL
-4. **React Router** - Takes over and renders the correct page
-
-This allows clean URLs like `/portfolio`, `/photos`, and `/about` to work correctly.
-
-### CORS-Free RSS Feed
-
-The Blogger RSS feed is fetched differently in development vs production:
-
-- **Development**: Vite dev server proxies requests from `/api/blogger` to the actual RSS feed
-- **Production**: Fetches directly from the RSS feed (CORS is allowed from your domain)
-
-This eliminates the need for third-party CORS proxies.
-
-## Scripts
-
-- `npm run dev` - Start development server with HMR
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run deploy` - Deploy to GitHub Pages
-- `npm run lint` - Run ESLint
-
-## Configuration
-
-### Vite Config
-
-`vite.config.js` contains:
-- **Base URL**: Set to `./` for relative paths (works with custom domain)
-- **Build Output**: Outputs to `/dist` with assets in `/assets`
-- **Dev Server Proxy**: Proxies `/api/blogger` to Blogger RSS feed
-
-### GitHub Pages Setup
-
-1. Repository Settings → Pages
-2. Source: Deploy from a branch
-3. Branch: `gh-pages` / `root`
-4. Custom domain: `romangarms.com` (configured in CNAME file)
+Client-side routing on GitHub Pages works through `public/404.html`, which redirects unknown paths
+back to `index.html` with the path in the query string.

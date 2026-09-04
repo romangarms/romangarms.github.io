@@ -1,16 +1,16 @@
 {
-  "name": "romangarms-website",
+  "name": "ar-romangarms-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://romangarms.com",
+  "homepage": "https://ar.romangarms.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --nojekyll"
+    "deploy": "gh-pages -d dist --nojekyll -r https://github.com/romangarms/ar.romangarms.com.git"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",

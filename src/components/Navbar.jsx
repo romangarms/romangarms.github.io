@@ -1,84 +1,49 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
-  const navbarCollapseRef = useRef(null);
+const LINKS = [
+  { to: '/acceleration', label: 'Acceleration' },
+  { to: '/leaderboard', label: 'Leaderboard (WA)' },
+  { to: '/leaderboard-ca', label: 'Leaderboard (CA)' },
+];
 
-  const closeNavbar = () => {
-    const navbarCollapse = navbarCollapseRef.current;
-    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-      // Use Bootstrap's collapse API to close the navbar
-      const bsCollapse = window.bootstrap?.Collapse.getInstance(navbarCollapse);
-      if (bsCollapse) {
-        bsCollapse.hide();
-      } else {
-        // Fallback: manually remove the show class
-        navbarCollapse.classList.remove('show');
-      }
-    }
-  };
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/portfolio">
-          Roman Garms
+    <nav className="navbar">
+      <div className="navbar-inner">
+        <Link className="navbar-brand" to="/" onClick={() => setOpen(false)}>
+          <img src="/images/logo.png" alt="" className="navbar-logo" />
+          <span>Aerial Reforestation</span>
         </Link>
         <button
-          className="navbar-toggler navbar-dark"
+          className="navbar-toggle"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+          aria-expanded={open}
+          aria-controls="navbar-links"
           aria-label="Toggle navigation"
+          onClick={() => setOpen((o) => !o)}
         >
-          <span className="navbar-toggler-icon"></span>
+          <span />
+          <span />
+          <span />
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent" ref={navbarCollapseRef}>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+        <ul id="navbar-links" className={open ? 'navbar-links open' : 'navbar-links'}>
+          {LINKS.map(({ to, label }) => (
+            <li key={to}>
               <NavLink
-                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                to="/portfolio"
-                onClick={closeNavbar}
+                to={to}
+                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                onClick={() => setOpen(false)}
               >
-                Portfolio
+                {label}
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                to="/about"
-                onClick={closeNavbar}
-              >
-                About Me
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                to="/garage"
-                onClick={closeNavbar}
-              >
-                Garage
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                to="/projects"
-                onClick={closeNavbar}
-              >
-                Projects
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+          ))}
+        </ul>
       </div>
     </nav>
   );
 }
-
-export default Navbar;

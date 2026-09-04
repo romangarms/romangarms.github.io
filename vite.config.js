@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { copyFileSync } from 'fs'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -13,19 +12,17 @@ export default defineConfig({
       }
     }
   ],
-  base: '/', // Use absolute paths for GitHub Pages with custom domain
+  base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
   },
   server: {
     proxy: {
-      // Proxy Blogger RSS feed to avoid CORS in development
-      '/api/blogger': {
-        target: 'https://blog.romangarms.com',
+      // The leaderboard API has no CORS headers and is plain HTTP, so dev traffic goes through Vite.
+      '/api': {
+        target: 'http://mini.romangarms.com:8321',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/blogger/, '/feeds/posts/default'),
-        secure: true
       }
     }
   }

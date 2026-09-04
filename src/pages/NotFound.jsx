@@ -1,19 +1,11 @@
 import { Link } from 'react-router-dom';
-import './NotFound.css';
 
-function NotFound() {
+export default function NotFound() {
   return (
-    <div className="not-found-page">
-      <div className="not-found-content">
-        <h1>404</h1>
-        <h2>Page Not Found</h2>
-        <p>Sorry, the page you're looking for doesn't exist.</p>
-        <Link to="/portfolio" className="home-link">
-          Go back to Portfolio
-        </Link>
-      </div>
+    <div className="page" style={{ textAlign: 'center' }}>
+      <h1 className="page-title">404</h1>
+      <p className="page-lead" style={{ margin: '0 auto 1rem' }}>That page doesn't exist.</p>
+      <Link to="/">Back to the leaderboards</Link>
     </div>
   );
 }
-
-export default NotFound;
