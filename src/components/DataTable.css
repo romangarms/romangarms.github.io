@@ -107,10 +107,10 @@
   font-weight: 600;
 }
 
-.data-table td.tint-green { background-color: #b7e1cd; }
-.data-table td.tint-lightgreen { background-color: #cce5cc; }
-.data-table td.tint-yellow { background-color: #ffe599; }
-.data-table td.tint-orange { background-color: #f9cb9c; }
-.data-table td.tint-red { background-color: #f4cccc; }
-.data-table td.tint-day { background-color: #ffd966; }
-.data-table td.tint-gray { background-color: #b7b7b7; }
+.data-table td.tint-green { background-color: #57bb8a; }
+.data-table td.tint-lightgreen { background-color: #a4d3a2; }
+.data-table td.tint-yellow { background-color: #ffd54f; }
+.data-table td.tint-orange { background-color: #f6a45b; }
+.data-table td.tint-red { background-color: #e57373; }
+.data-table td.tint-day { background-color: #f1c232; }
+.data-table td.tint-gray { background-color: #9e9e9e; }
