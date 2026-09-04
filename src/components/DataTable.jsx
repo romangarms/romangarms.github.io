@@ -32,7 +32,7 @@ function display(v) {
 
 export default function DataTable({ columns, rows, loading, error, rank = true, emptyMessage = 'No entries yet.' }) {
   const [sort, setSort] = useState(null);
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
   const ranked = useMemo(() => (rows ?? []).map((row, i) => ({ row, rank: i + 1 })), [rows]);
 

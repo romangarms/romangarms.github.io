@@ -125,7 +125,7 @@
   padding: 0.4rem 0.8rem;
 }
 
-/* Phones: denser rows and only the key columns until "Show all columns" is tapped. */
+/* Phones: denser rows, with a toggle to hide the secondary columns. */
 @media (max-width: 640px) {
   .table-toolbar {
     display: flex;

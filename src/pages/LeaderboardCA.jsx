@@ -18,7 +18,7 @@ const BASE_COLUMNS = [
   { key: 'driver', label: 'Driver', align: 'center' },
   { key: 'run_date', label: 'Date', align: 'right', secondary: true, render: (r) => formatDate(r.run_date) || '—' },
   { key: 'time_of_day', label: 'Time of Day', align: 'right', secondary: true },
-  { key: 'conditions', label: 'Road', secondary: true, tint: (r) => conditionTint(r.conditions) },
+  { key: 'conditions', label: 'Conditions', tint: (r) => conditionTint(r.conditions) },
 ];
 
 function columnsFor(runs) {
@@ -31,7 +31,7 @@ function columnsFor(runs) {
       : []),
     ...BASE_COLUMNS,
     ...(hasLegacy ? [{ key: 'legacy', label: 'Legacy', align: 'center', secondary: true }] : []),
-    ...(hasNotes ? [{ key: 'notes', label: 'Notes', secondary: true }] : []),
+    ...(hasNotes ? [{ key: 'notes', label: 'Info' }] : []),
   ];
 }
 
@@ -100,7 +100,7 @@ export default function LeaderboardCA() {
 
       {data?.source === 'sheet' && (
         <div className="notice">
-          The live leaderboard API couldn't be reached, so these tables come from the published sheet.
+          The live leaderboard API couldn't be loaded in this browser, so these tables come from the published sheet.
         </div>
       )}
 
