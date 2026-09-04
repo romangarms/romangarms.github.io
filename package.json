@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --nojekyll"
+    "deploy": "gh-pages -d dist --nojekyll --remove '{*,!(ar)/**}'"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
