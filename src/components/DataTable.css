@@ -100,3 +100,17 @@
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
+
+/* Cell tints copied from the source sheets' conditional formatting. */
+.data-table td.tint {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.data-table td.tint-green { background-color: #b7e1cd; }
+.data-table td.tint-lightgreen { background-color: #cce5cc; }
+.data-table td.tint-yellow { background-color: #ffe599; }
+.data-table td.tint-orange { background-color: #f9cb9c; }
+.data-table td.tint-red { background-color: #f4cccc; }
+.data-table td.tint-day { background-color: #ffd966; }
+.data-table td.tint-gray { background-color: #b7b7b7; }

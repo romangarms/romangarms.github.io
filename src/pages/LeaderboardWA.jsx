@@ -7,16 +7,17 @@ import { fetchSheet } from '../services/sheets';
 import { SHEETS } from '../data/sheets';
 import { PHOTOS, TRACK_ADDICT_WA } from '../data/media';
 import { asset } from '../utils/asset';
+import { conditionTint, limiterTint } from '../utils/tints';
 
 const CANNONBALL_COLUMNS = [
   { key: 'Time', label: 'Time', align: 'right' },
   { key: 'Vehicle', label: 'Vehicle' },
   { key: 'Avg Speed', label: 'Avg (mph)', align: 'right' },
-  { key: 'Top Speed', label: 'Top (mph)', align: 'right' },
+  { key: 'Top Speed', label: 'Top (mph)', align: 'right', tint: (r) => limiterTint(r['Top Speed']) },
   { key: 'Start Time', label: 'Start', align: 'right' },
   { key: 'Driver', label: 'Driver', align: 'center' },
   { key: 'Date', label: 'Date', align: 'right' },
-  { key: 'Condition', label: 'Conditions' },
+  { key: 'Condition', label: 'Conditions', tint: (r) => conditionTint(r.Condition) },
 ];
 
 const DISCO_COLUMNS = [

@@ -3,12 +3,13 @@ import DataTable from '../components/DataTable';
 import { useAsync } from '../hooks/useAsync';
 import { fetchSheet } from '../services/sheets';
 import { SHEETS } from '../data/sheets';
+import { hpTint } from '../utils/tints';
 
 const COLUMNS = [
   { key: 'Year', label: 'Year' },
   { key: 'Vehicle', label: 'Vehicle' },
   { key: 'Driver', label: 'Driver', align: 'center' },
-  { key: 'Horsepower', label: 'HP', align: 'right' },
+  { key: 'Horsepower', label: 'HP', align: 'right', tint: (r) => hpTint(r.Horsepower) },
   { key: 'Weight', label: 'Weight (lb)', align: 'right' },
   { key: '0-30 Time', label: '0–30 (s)', align: 'right' },
   { key: '0-60 Time', label: '0–60 (s)', align: 'right' },

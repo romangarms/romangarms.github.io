@@ -8,16 +8,17 @@ import { SHEETS } from '../data/sheets';
 import { TRACK_ADDICT_CA } from '../data/media';
 import { formatDate } from '../utils/format';
 import { asset } from '../utils/asset';
+import { hpTint, conditionTint } from '../utils/tints';
 
 const BASE_COLUMNS = [
-  { key: 'hp', label: 'HP', align: 'right' },
+  { key: 'hp', label: 'HP', align: 'right', tint: (r) => hpTint(r.hp) },
   { key: 'vehicle', label: 'Vehicle' },
   { key: 'avg_speed_mph', label: 'Avg (mph)', align: 'right' },
   { key: 'top_speed_mph', label: 'Top (mph)', align: 'right' },
   { key: 'driver', label: 'Driver', align: 'center' },
   { key: 'run_date', label: 'Date', align: 'right', render: (r) => formatDate(r.run_date) || '—' },
   { key: 'time_of_day', label: 'Time of Day', align: 'right' },
-  { key: 'conditions', label: 'Road' },
+  { key: 'conditions', label: 'Road', tint: (r) => conditionTint(r.conditions) },
 ];
 
 function columnsFor(runs) {
@@ -25,7 +26,9 @@ function columnsFor(runs) {
   const hasNotes = runs.some((r) => r.notes);
   return [
     { key: 'adjusted_time', label: hasLegacy ? 'Adj. Time' : 'Time', align: 'right' },
-    ...(hasLegacy ? [{ key: 'time', label: 'Raw Time', align: 'right' }] : []),
+    ...(hasLegacy
+      ? [{ key: 'time', label: 'Raw Time', align: 'right', tint: (r) => (r.legacy ? 'lightgreen' : null) }]
+      : []),
     ...BASE_COLUMNS,
     ...(hasLegacy ? [{ key: 'legacy', label: 'Legacy', align: 'center' }] : []),
     ...(hasNotes ? [{ key: 'notes', label: 'Notes' }] : []),

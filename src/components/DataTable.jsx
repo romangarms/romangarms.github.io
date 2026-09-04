@@ -94,11 +94,15 @@ export default function DataTable({ columns, rows, loading, error, rank = true, 
             sorted.map(({ row, rank: r }, i) => (
               <tr key={row.id ?? i} className={r <= 3 ? `podium podium-${r}` : undefined}>
                 {rank && <td className="col-rank">{r}</td>}
-                {columns.map((c) => (
-                  <td key={c.key} className={c.align ? `align-${c.align}` : undefined}>
-                    {c.render ? c.render(row) : display(row[c.key])}
-                  </td>
-                ))}
+                {columns.map((c) => {
+                  const tint = c.tint?.(row);
+                  const classes = [c.align && `align-${c.align}`, tint && `tint tint-${tint}`].filter(Boolean);
+                  return (
+                    <td key={c.key} className={classes.length ? classes.join(' ') : undefined}>
+                      {c.render ? c.render(row) : display(row[c.key])}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
         </tbody>
