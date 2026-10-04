@@ -3,38 +3,51 @@ import DataTable from '../components/DataTable';
 import PhotoCarousel from '../components/PhotoCarousel';
 import TrackAddictCard from '../components/TrackAddictCard';
 import { useAsync } from '../hooks/useAsync';
-import { fetchSheet } from '../services/sheets';
-import { SHEETS } from '../data/sheets';
+import { loadBoards } from '../services/leaderboardAPI';
 import { PHOTOS, TRACK_ADDICT_WA } from '../data/media';
 import { asset } from '../utils/asset';
+import { formatDate } from '../utils/format';
 import { conditionTint, limiterTint } from '../utils/tints';
 
+const isLimited = (r) => limiterTint(r.notes);
+
 const CANNONBALL_COLUMNS = [
-  { key: 'Time', label: 'Time', align: 'right' },
-  { key: 'Vehicle', label: 'Vehicle', wrap: true },
-  { key: 'Avg Speed', label: 'Avg (mph)', align: 'right', secondary: true },
-  { key: 'Top Speed', label: 'Top (mph)', align: 'right', secondary: true, tint: (r) => limiterTint(r['Top Speed']) },
-  { key: 'Start Time', label: 'Start', align: 'right', secondary: true },
-  { key: 'Driver', label: 'Driver', align: 'center' },
-  { key: 'Date', label: 'Date', align: 'right', secondary: true },
-  { key: 'Condition', label: 'Conditions', tint: (r) => conditionTint(r.Condition) },
+  { key: 'time', label: 'Time', align: 'right' },
+  { key: 'vehicle', label: 'Vehicle', wrap: true },
+  { key: 'avg_speed_mph', label: 'Avg (mph)', align: 'right', secondary: true },
+  {
+    key: 'top_speed_mph',
+    label: 'Top (mph)',
+    align: 'right',
+    secondary: true,
+    tint: isLimited,
+    render: (r) => (r.top_speed_mph == null ? '—' : `${r.top_speed_mph}${isLimited(r) ? ' (limiter)' : ''}`),
+  },
+  { key: 'time_of_day', label: 'Start', align: 'right', secondary: true },
+  { key: 'driver', label: 'Driver', align: 'center' },
+  { key: 'run_date', label: 'Date', align: 'right', secondary: true, render: (r) => formatDate(r.run_date) || '—' },
+  { key: 'conditions', label: 'Conditions', tint: (r) => conditionTint(r.conditions) },
 ];
 
 const DISCO_COLUMNS = [
-  { key: 'Time', label: 'Time', align: 'right' },
-  { key: 'Model Year', label: 'Year', secondary: true },
-  { key: 'Vehicle', label: 'Vehicle', wrap: true },
-  { key: 'Direction Up/Down', label: 'Direction' },
-  { key: 'Driver', label: 'Driver', align: 'center' },
-  { key: 'Date', label: 'Date', align: 'right', secondary: true },
+  { key: 'time', label: 'Time', align: 'right' },
+  { key: 'vehicle', label: 'Vehicle', wrap: true },
+  { key: 'notes', label: 'Direction' },
+  { key: 'driver', label: 'Driver', align: 'center' },
+  { key: 'run_date', label: 'Date', align: 'right', secondary: true, render: (r) => formatDate(r.run_date) || '—' },
 ];
 
-function SheetTable({ sheet, columns }) {
-  const { data, error, loading } = useAsync(() => fetchSheet(sheet), [sheet]);
-  return <DataTable columns={columns} rows={data?.rows} loading={loading} error={error} />;
-}
-
 export default function LeaderboardWA() {
+  const { data: boards, error, loading } = useAsync(() => loadBoards('WA'));
+  const table = (name, columns) => (
+    <DataTable
+      columns={columns}
+      rows={boards?.find((b) => b.course.name === name)?.runs}
+      loading={loading}
+      error={error}
+    />
+  );
+
   return (
     <div className="page">
       <header className="page-header">
@@ -48,9 +61,9 @@ export default function LeaderboardWA() {
       <Section id="cannonball" title="Bellingham Cannonball Run Leaderboard">
         <img src={asset('images/cannonball-smoke.jpg')} alt="" className="hero-image" />
         <h3 className="subsection-title">North Runs</h3>
-        <SheetTable sheet={SHEETS.cannonballNorth} columns={CANNONBALL_COLUMNS} />
+        {table('Cannonball North', CANNONBALL_COLUMNS)}
         <h3 className="subsection-title">South Runs</h3>
-        <SheetTable sheet={SHEETS.cannonballSouth} columns={CANNONBALL_COLUMNS} />
+        {table('Cannonball South', CANNONBALL_COLUMNS)}
       </Section>
 
       <Section
@@ -66,7 +79,7 @@ export default function LeaderboardWA() {
         title="Disco Run Leaderboard"
         subtitle="Recorded times using Track Addict of the Discovery Park touge."
       >
-        <SheetTable sheet={SHEETS.disco} columns={DISCO_COLUMNS} />
+        {table('Disco Run', DISCO_COLUMNS)}
       </Section>
 
       <Section id="record" title="Record Your Own Time (WA)" subtitle="Import into Track Addict.">

@@ -2,7 +2,7 @@ import Section from '../components/Section';
 import DataTable from '../components/DataTable';
 import TrackAddictCard from '../components/TrackAddictCard';
 import { useAsync } from '../hooks/useAsync';
-import { listCourses, getCourseLeaderboard } from '../services/leaderboardAPI';
+import { loadBoards } from '../services/leaderboardAPI';
 import { TRACK_ADDICT_CA } from '../data/media';
 import { formatDate } from '../utils/format';
 import { asset } from '../utils/asset';
@@ -33,11 +33,6 @@ function columnsFor(runs) {
   ];
 }
 
-async function loadBoards() {
-  const courses = await listCourses();
-  return Promise.all(courses.map((c) => getCourseLeaderboard(c.id)));
-}
-
 function courseNote(course) {
   if (!course.distance_miles) return null;
   const legacy = course.legacy_distance_miles
@@ -47,7 +42,7 @@ function courseNote(course) {
 }
 
 export default function LeaderboardCA() {
-  const { data: boards, error, loading } = useAsync(loadBoards);
+  const { data: boards, error, loading } = useAsync(() => loadBoards('CA'));
 
   return (
     <div className="page">

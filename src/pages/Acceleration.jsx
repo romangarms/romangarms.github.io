@@ -1,26 +1,25 @@
 import Section from '../components/Section';
 import DataTable from '../components/DataTable';
 import { useAsync } from '../hooks/useAsync';
-import { fetchSheet } from '../services/sheets';
-import { SHEETS } from '../data/sheets';
+import { listAcceleration } from '../services/leaderboardAPI';
 import { hpTint } from '../utils/tints';
 
 const COLUMNS = [
-  { key: 'Year', label: 'Year', secondary: true },
-  { key: 'Vehicle', label: 'Vehicle', wrap: true },
-  { key: 'Driver', label: 'Driver', align: 'center', secondary: true },
-  { key: 'Horsepower', label: 'HP', align: 'right', tint: (r) => hpTint(r.Horsepower) },
-  { key: 'Weight', label: 'Weight (lb)', align: 'right', secondary: true },
-  { key: '0-30 Time', label: '0–30 (s)', align: 'right' },
-  { key: '0-60 Time', label: '0–60 (s)', align: 'right' },
-  { key: '1/4 Time', label: '¼ mi (s)', align: 'right', secondary: true },
-  { key: '1/4 Speed', label: '¼ mi (mph)', align: 'right', secondary: true },
-  { key: '1/8 Time', label: '⅛ mi (s)', align: 'right', secondary: true },
-  { key: '1/8 Speed', label: '⅛ mi (mph)', align: 'right', secondary: true },
+  { key: 'year', label: 'Year', secondary: true },
+  { key: 'vehicle', label: 'Vehicle', wrap: true },
+  { key: 'driver', label: 'Driver', align: 'center', secondary: true },
+  { key: 'hp', label: 'HP', align: 'right', tint: (r) => hpTint(r.hp) },
+  { key: 'weight_lb', label: 'Weight (lb)', align: 'right', secondary: true },
+  { key: 'zero_to_30_seconds', label: '0–30 (s)', align: 'right' },
+  { key: 'zero_to_60_seconds', label: '0–60 (s)', align: 'right' },
+  { key: 'quarter_mile_seconds', label: '¼ mi (s)', align: 'right', secondary: true },
+  { key: 'quarter_mile_mph', label: '¼ mi (mph)', align: 'right', secondary: true },
+  { key: 'eighth_mile_seconds', label: '⅛ mi (s)', align: 'right', secondary: true },
+  { key: 'eighth_mile_mph', label: '⅛ mi (mph)', align: 'right', secondary: true },
 ];
 
 export default function Acceleration() {
-  const { data, error, loading } = useAsync(() => fetchSheet(SHEETS.acceleration));
+  const { data, error, loading } = useAsync(listAcceleration);
 
   return (
     <div className="page">
@@ -29,7 +28,7 @@ export default function Acceleration() {
         0–30 and 0–60 times from our cars, and any other self-propelled vehicles in the group.
       </p>
       <Section>
-        <DataTable columns={COLUMNS} rows={data?.rows} loading={loading} error={error} />
+        <DataTable columns={COLUMNS} rows={data} loading={loading} error={error} />
       </Section>
     </div>
   );

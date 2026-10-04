@@ -1,4 +1,4 @@
-// Mirrors the conditional formatting rules in the source Google Sheets.
+// Mirrors the conditional formatting rules of the Google Sheets the boards started in.
 export function hpTint(value) {
   const hp = parseFloat(value);
   if (Number.isNaN(hp)) return null;
