@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
@@ -20,6 +20,106 @@ const getForzaClassColor = (forzaClass) => {
     'F': '#666666',  // Gray
   };
   return colors[letter] || '#666';
+};
+
+// A car's photos: the primary `image` plus any extras listed in `images`
+const getCarImages = (car) => {
+  const extras = car.images || [];
+  return [car.image, ...extras.filter((src) => src !== car.image)];
+};
+
+// Hero image with arrows + thumbnails when a car has more than one photo
+function CarGallery({ car }) {
+  const images = getCarImages(car);
+  const hasMultiple = images.length > 1;
+  const [index, setIndex] = useState(0);
+
+  // Start on the first photo whenever a different car is opened
+  useEffect(() => {
+    setIndex(0);
+  }, [car.id]);
+
+  const step = useCallback((delta) => {
+    setIndex((current) => (current + delta + images.length) % images.length);
+  }, [images.length]);
+
+  useEffect(() => {
+    if (!hasMultiple) return undefined;
+
+    const handleArrowKeys = (e) => {
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    };
+
+    document.addEventListener('keydown', handleArrowKeys);
+    return () => document.removeEventListener('keydown', handleArrowKeys);
+  }, [hasMultiple, step]);
+
+  return (
+    <div className="car-gallery">
+      <div className="car-hero">
+        <img
+          src={images[index]}
+          alt={hasMultiple ? `${car.title} - photo ${index + 1} of ${images.length}` : car.title}
+        />
+        {car.stats?.forzaClass && (
+          <div
+            className="forza-class-badge"
+            style={{ background: getForzaClassColor(car.stats.forzaClass) }}
+          >
+            {car.stats.forzaClass}
+          </div>
+        )}
+        {hasMultiple && (
+          <>
+            <button
+              className="gallery-nav gallery-nav-prev"
+              onClick={() => step(-1)}
+              aria-label="Previous photo"
+            >
+              <Icon icon="mdi:chevron-left" width="32" />
+            </button>
+            <button
+              className="gallery-nav gallery-nav-next"
+              onClick={() => step(1)}
+              aria-label="Next photo"
+            >
+              <Icon icon="mdi:chevron-right" width="32" />
+            </button>
+            <span className="gallery-counter">{index + 1} / {images.length}</span>
+          </>
+        )}
+      </div>
+
+      {hasMultiple && (
+        <div className="gallery-thumbs">
+          {images.map((src, i) => (
+            <button
+              key={src}
+              className={`gallery-thumb${i === index ? ' active' : ''}`}
+              onClick={() => setIndex(i)}
+              aria-label={`Show photo ${i + 1}`}
+              aria-current={i === index}
+            >
+              <img src={src} alt="" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+CarGallery.propTypes = {
+  car: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string),
+    stats: PropTypes.shape({
+      forzaClass: PropTypes.string
+    })
+  }).isRequired
 };
 
 function CarModal({ car, isOpen, onClose }) {
@@ -87,18 +187,8 @@ function CarModal({ car, isOpen, onClose }) {
       </button>
 
       <div className="car-modal-scroll">
-        {/* Hero Image */}
-        <div className="car-hero">
-          <img src={car.image} alt={car.title} />
-          {car.stats?.forzaClass && (
-            <div
-              className="forza-class-badge"
-              style={{ background: getForzaClassColor(car.stats.forzaClass) }}
-            >
-              {car.stats.forzaClass}
-            </div>
-          )}
-        </div>
+        {/* Photo gallery (hero image + extras) */}
+        <CarGallery car={car} />
 
         {/* Header */}
         <div className="car-header">
@@ -219,6 +309,7 @@ CarModal.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string),
     briefInfo: PropTypes.string,
     description: PropTypes.string,
     stats: PropTypes.shape({

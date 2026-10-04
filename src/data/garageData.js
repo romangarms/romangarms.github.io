@@ -5,6 +5,8 @@
  * - id: Unique identifier
  * - title: Car name (e.g., "2019 Ford Mustang GT")
  * - image: Path to thumbnail image (place images in /public/images/garage/)
+ * - images: Optional extra photos shown in the detail view's gallery. The
+ *   thumbnail above always comes first, so only list the additional ones here.
  * - briefInfo: Short 1-2 sentence summary for the card
  * - description: Full paragraph for the detail view
  * - stats: Performance specifications + usage/status info
@@ -16,6 +18,13 @@ export const cars = [
     id: "M3TH",
     title: "2023 Mazda 3 Turbo Hatchback",
     image: "/images/garage/M3TH.jpeg",
+    images: [
+      "/images/garage/M3TH-2.jpeg",
+      "/images/garage/M3TH-3.jpeg",
+      "/images/garage/M3TH-4.jpeg",
+      "/images/garage/M3TH-5.jpeg",
+      "/images/garage/M3TH-6.jpeg"
+    ],
     briefInfo: "Hot hatch adjacent, dream daily for many years. Now mine. \n\n An absolute treat at the AutoX, and getting it ready for more track days.",
     description: "My current daily driver. I purchased this car used in 2025 after another driver totalled my beloved 2015 Mazda 3. Slowly building it up for spirited driving plus autocross duties, but it will see a track day every now and then.\n\n Next up on the todo list is coilovers, and Brembo big brake kit. Eventually...",
     stats: {
@@ -49,6 +58,12 @@ export const cars = [
     id: "BERG",
     title: "1988 Pontiac Firebird",
     image: "/images/garage/BERG.jpeg",
+    images: [
+      "/images/garage/BERG-2.jpeg",
+      "/images/garage/BERG-3.jpeg",
+      "/images/garage/BERG-4.jpeg",
+      "/images/garage/BERG-5.jpeg"
+    ],
     briefInfo: "Group project car! 1969 Chevy 307 engine swap. \n T-Tops and a V8 make for a great time.",
     description: "Split the cost between 4 friends, project never ends. T-Tops are fantastic, V8 sounds like a tractor. What more could you want in a $3000 car? \n\n Breaks down with some regularity, but always a cheap fix. Very fun to slide in the rain.",
     stats: {
@@ -71,6 +86,13 @@ export const cars = [
     id: "Z4M",
     title: "2007 BMW Z4 M Coupe",
     image: "/images/garage/Z4M.jpeg",
+    images: [
+      "/images/garage/Z4M-2.jpeg",
+      "/images/garage/Z4M-3.jpeg",
+      "/images/garage/Z4M-4.jpeg",
+      "/images/garage/Z4M-5.jpeg",
+      "/images/garage/Z4M-6.jpeg"
+    ],
     briefInfo: "Track car purchased for my dad and I, now mine. \n 8000+ RPM solves a lot of problems.",
     description: "8250 RPM, straight six, manual transmission. A dream at the track, fun everywhere else too. \n\n Not looking forward to dealing with the rod bearings.",
     stats: {
@@ -98,6 +120,12 @@ export const cars = [
     id: "XTERRA",
     title: "2004 Nissan Xterra 4x4",
     image: "/images/garage/XTERRA.jpeg",
+    images: [
+      "/images/garage/XTERRA-2.jpeg",
+      "/images/garage/XTERRA-3.jpeg",
+      "/images/garage/XTERRA-4.jpeg",
+      "/images/garage/XTERRA-5.jpeg"
+    ],
     briefInfo: "Cheapest whimsical and reliable 4x4 we could find. \n\nSlow and simple, but I love it.",
     description: "My friend Evan and I bought a project car together so we could join our friends on their offroad expeditions.\n\n $3500 and counting.",
     stats: {
@@ -119,6 +147,10 @@ export const cars = [
     id: "M3",
     title: "2015 Mazda 3 S Grand Touring",
     image: "/images/garage/M3.jpeg",
+    images: [
+      "/images/garage/M3-2.jpeg",
+      "/images/garage/M3-3.jpeg"
+    ],
     briefInfo: "My first car, then my third car, then gone. \n Great fun, learned some software hacks.",
     description: "My mom's old car, learned to drive in it. Proceeded to buy the Audi A4, it sucked, and then returned to this car, which never let me down. \n I learned a lot of software hacks in this car, getting it set up with Mazda AIO Tweaks and CASDK, and then writing my own digital dashboard app. \n In January 2025, another driver totalled the car, leading to my new Mazda 3 Turbo. Loved this car, quite fun to drive, and quicker than one would expect at the AutoX. \n Read more about what I've done to it here: https://blog.romangarms.com/2024/06/hacking-my-mazda-infotainment-mzd-aio.html https://blog.romangarms.com/2024/03/drtuned-tuning-my-car-with-my-steam-deck.html",
     stats: {
@@ -150,6 +182,11 @@ export const cars = [
     id: "A4",
     title: "2011 Audi A4",
     image: "/images/garage/A4.jpeg",
+    images: [
+      "/images/garage/A4-2.jpeg",
+      "/images/garage/A4-3.jpeg",
+      "/images/garage/A4-4.jpeg"
+    ],
     briefInfo: "Mechanical nightmare, fun to drive. Owned for less than a year. \n 200 miles to the quart (of oil).",
     description: "Bought in late 2022, sold in mid 2023. First car that was my own, learned to drive manual in it. Most things were lovely, but burning a quart of oil every 200 miles is unacceptable. \n\n I miss this car in theory, but in reality it's probably good that it's gone. \n Read about some of the mods I did here: https://blog.romangarms.com/2023/01/installing-carplay-in-11-year-old-audi.html",
     stats: {
