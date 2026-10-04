@@ -28,6 +28,7 @@ const getUsageIcon = (usage) => {
     case 'Daily': return <Icon icon="mdi:car" width="16" />;
     case 'AutoX': return <Icon icon="mdi:go-kart" width="16" />;
     case 'Track': return <Icon icon="mdi:flag-checkered" width="16" />;
+    case 'Offroad': return <Icon icon="mdi:car-lifted-pickup" width="16" />;
     case 'Project': return <Icon icon="mdi:wrench" width="16" />;
     default: return null;
   }

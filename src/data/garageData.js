@@ -19,9 +19,9 @@ export const cars = [
     briefInfo: "Hot hatch adjacent, dream daily for many years. Now mine. \n\n An absolute treat at the AutoX, and getting it ready for more track days.",
     description: "My current daily driver. I purchased this car used in 2025 after another driver totalled my beloved 2015 Mazda 3. Slowly building it up for spirited driving plus autocross duties, but it will see a track day every now and then.\n\n Next up on the todo list is coilovers, and Brembo big brake kit. Eventually...",
     stats: {
-      power: "300 HP",
+      power: "280 HP",
       torque: "380 lb-ft",
-      zeroToSixty: "5.5s",
+      zeroToSixty: "5.2s",
       forzaClass: "B 620",
       topSpeed: "135 mph",
       drivetrain: "AWD",
@@ -71,10 +71,10 @@ export const cars = [
     id: "Z4M",
     title: "2007 BMW Z4 M Coupe",
     image: "/images/garage/Z4M.jpeg",
-    briefInfo: "Track car purchased for my dad and I, many mods. \n 8000 RPM solves a lot of problems.",
-    description: "8000 RPM, straight six, manual transmission. A dream at the track, fun everywhere else too. \n\n Not looking forward to dealing with the rod bearings.",
+    briefInfo: "Track car purchased for my dad and I, now mine. \n 8000+ RPM solves a lot of problems.",
+    description: "8250 RPM, straight six, manual transmission. A dream at the track, fun everywhere else too. \n\n Not looking forward to dealing with the rod bearings.",
     stats: {
-      power: "350 HP",
+      power: "340 HP",
       torque: "260 lb-ft",
       zeroToSixty: "5.8s",
       forzaClass: "A 523",
@@ -92,6 +92,27 @@ export const cars = [
       { name: "BBS Wheels", category: "Wheels + Tires" },
       { name: "StopTech Big Brake Kit", category: "Brakes" },
       { name: "Carphonics Wireless Carplay Kit", category: "Electronics" },
+    ]
+  },
+  {
+    id: "XTERRA",
+    title: "2004 Nissan Xterra 4x4",
+    image: "/images/garage/XTERRA.jpeg",
+    briefInfo: "Cheapest whimsical and reliable 4x4 we could find. \n\nSlow and simple, but I love it.",
+    description: "My friend Evan and I bought a project car together so we could join our friends on their offroad expeditions.\n\n $3500 and counting.",
+    stats: {
+      power: "180 HP",
+      torque: "202 lb-ft",
+      zeroToSixty: "12.3s",
+      forzaClass: "D 100",
+      topSpeed: "114 mph",
+      drivetrain: "4WD",
+      transmission: "Auto",
+      status: "Owned",
+      usage: ["Offroad", "Project"]
+    },
+    mods: [
+      { name: "OEM Nismo Exhaust", category: "Engine" },
     ]
   },
   {
