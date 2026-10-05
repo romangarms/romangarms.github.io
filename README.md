@@ -24,6 +24,10 @@ renaming one on the server means renaming it in `src/pages/LeaderboardWA.jsx` to
 The base URL is `https://autox.romangarms.com` in production and is proxied through Vite at `/api`
 in development (see `vite.config.js`). Override it with `VITE_API_BASE` in a `.env` file.
 
+Boards the app keeps unlisted are only returned to requests carrying the server's read key. Put it
+in `.env` as `VITE_LEADERBOARD_KEY` (print it on the server with `./start.sh read-key`) before
+building, or those boards come back missing. The key is read-only and ends up in the public bundle.
+
 ## Development
 
 ```bash
