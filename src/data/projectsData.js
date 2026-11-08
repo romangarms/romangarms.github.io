@@ -13,10 +13,11 @@ export const projects = [
     status: "Active",
     blogPostUrl: "https://romangarms.com/portfolio/an-actually-good-autocross-timing-app-and-it-s-free-autox-live",
     // This one lives on the App Store, not on GitHub, so the card ranks and
-    // badges it by how many phones have installed it rather than by stars.
+    // badges it by its TestFlight testers (the server falls back to its device
+    // count when it cannot ask App Store Connect) rather than by stars.
     userCount: {
       url: "https://autox.romangarms.com/api/stats",
-      field: "devices",
+      field: "users",
       label: "users"
     }
   },
