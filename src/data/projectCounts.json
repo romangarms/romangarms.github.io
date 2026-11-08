@@ -1,11 +1,11 @@
 {
   "autox-live": {
-    "users": 17,
+    "users": 22,
     "stars": null
   },
   "spotify-recommender": {
     "users": null,
-    "stars": 1
+    "stars": 0
   },
   "concepts-file-viewer": {
     "users": null,
@@ -13,7 +13,7 @@
   },
   "opz-sample-manager": {
     "users": null,
-    "stars": 17
+    "stars": 18
   },
   "wherehaveibeen": {
     "users": null,
