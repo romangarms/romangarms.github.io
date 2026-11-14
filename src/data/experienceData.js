@@ -1,11 +1,26 @@
 export const workExperience = [
   {
+    id: "ucsc-lss",
+    company: "University of California, Santa Cruz",
+    location: "Santa Cruz, CA",
+    role: "Small Group Tutor - LSS",
+    workType: "On-site",
+    dateRange: "September 2026 - Present",
+    skills: [
+      "C",
+      "Classroom instruction",
+      "Lesson planning",
+      "Teaching"
+    ],
+    description: "Lead small-group tutoring sessions for UCSC students learning to program in C, through Learning Support Services. Design lesson plans for each session and adapt explanations and pacing to each group's needs."
+  },
+  {
     id: "logic-inc",
     company: "LOGIC, Inc.",
     location: "Seattle, WA",
     role: "Software Engineering Intern → Junior Software Engineer",
     workType: "Hybrid",
-    dateRange: "April 2025 - Present",
+    dateRange: "April 2025 - November 2026",
     skills: [
       "React",
       "TypeScript",
