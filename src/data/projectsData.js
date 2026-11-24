@@ -31,7 +31,7 @@ export const projects = [
     downloadUrl: null,
     tags: ["AI", "Music", "Spotify API"],
     date: "2026-02-07",
-    status: "Maintained",
+    status: "Archived",
     blogPostUrl: "https://romangarms.com/portfolio/spotify-song-recommender-using-the-spotify-api-in-2026"
   },
   {
